@@ -1,0 +1,32 @@
+.active {
+  color: blue;
+}
+
+.inactive {
+  color: gray;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex-direction: row-reverse;
+}
+
+.p {
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.h1 {
+  font-size: 0.5rem;
+  margin: 2rem;
+}
