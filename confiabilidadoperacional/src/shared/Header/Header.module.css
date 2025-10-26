@@ -1,24 +1,10 @@
-.active {
-  color: blue;
-}
-
-.inactive {
-  color: gray;
-}
-
 .header {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-.nav {
-  display: flex;
-  gap: 20px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  flex-direction: row-reverse;
+  background-color: rgba(0, 0, 126, 0.678);
+  bottom: auto;
 }
 
 .p {
@@ -26,7 +12,19 @@
   padding: 2rem;
 }
 
-.h1 {
-  font-size: 0.5rem;
-  margin: 2rem;
+.page {
+  font-size: 2rem;
+  margin: 1rem;
+  color: black;
+}
+
+a {
+  color: black;
+  padding: 2rem;
+  background-color: rgba(117, 190, 255, 0.5);
+  border-radius: 5rem;
+  -webkit-border-radius: 5rem;
+  -moz-border-radius: 5rem;
+  -ms-border-radius: 5rem;
+  -o-border-radius: 5rem;
 }

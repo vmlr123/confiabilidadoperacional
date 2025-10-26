@@ -1,7 +1,28 @@
-.active {
+.clicked {
   color: blue;
 }
 
-.inactive {
+.notclicked {
   color: gray;
+}
+
+.container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  padding: 1rem;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(0, 0, 56);
+  height: 50vh;
+  gap: 1rem;
+  border-radius: 1rem;
+}
+
+.container a {
+  margin: 2rem;
+  padding: 1rem;
+  background-color: rgba(82, 82, 82, 0.568);
+  font-size: x-large;
+  border-radius: 1rem;
 }

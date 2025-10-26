@@ -8,7 +8,7 @@ type Props = {
   date: string;
 };
 
-export default function Article({ id, title, content, date }: Props) {
+export default function DedicatedArticlePage({ id, title, content, date }: Props) {
   const author = "Víctor Humberto Lameda Barreno";
   const articleDate = new Date(date).toLocaleDateString();
   console.log(content);
@@ -19,6 +19,7 @@ export default function Article({ id, title, content, date }: Props) {
       <h5 className={styles.author}>
         <em>Autor: {author}</em>
       </h5>
+      <div className={styles.content}>{content}</div>
     </div>
   );
 }

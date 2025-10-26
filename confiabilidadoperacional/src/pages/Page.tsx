@@ -9,7 +9,6 @@ export default function Page({
   title: string;
   content: string;
 }) {
-  const author = "Víctor Humberto Lameda Barreno";
   return (
     <div className="page">
       <h2 className="title">
@@ -19,9 +18,6 @@ export default function Page({
           ) as ReactNode
         }
       </h2>
-      <p className="author">
-        <em>Autor: {author}</em>
-      </p>
       <div className="content">
         {
           parse(
