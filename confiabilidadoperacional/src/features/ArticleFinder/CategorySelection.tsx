@@ -9,13 +9,26 @@ export default function CategorySelection({
   selectedCategories: Set<string>;
   setSelectedCategories: (value: Set<string>) => void;
 }) {
-  const [isChecked, setIsChecked] = useState<boolean>(true);
+  const [isChecked, setIsChecked] = useState<boolean>(
+    selectedCategories.has(category)
+  );
+
   useEffect(() => {
-    if (isChecked) {
+    setIsChecked(selectedCategories.has(category));
+  }, [selectedCategories, category]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setIsChecked(checked);
+    if (checked) {
       setSelectedCategories(new Set([...selectedCategories, category]));
-      setIsChecked(false);
+    } else {
+      const newSet = new Set(selectedCategories);
+      newSet.delete(category);
+      setSelectedCategories(newSet);
     }
-  }, [isChecked, category, selectedCategories, setSelectedCategories]);
+  };
+
   return (
     <>
       <div>
@@ -25,7 +38,7 @@ export default function CategorySelection({
           name="category"
           value={category}
           checked={isChecked}
-          onChange={(e) => setIsChecked(e.target.checked)}
+          onChange={handleChange}
         />
         <label htmlFor={category}>{category}</label>
         <br />

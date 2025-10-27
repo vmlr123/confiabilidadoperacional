@@ -1,10 +1,7 @@
-# React-Router Verification Tasks
+# TODO: Make App Responsive for Smaller Devices
 
-- [x] Search for react-router usage in the project
-- [x] Read and analyze src/App.tsx for routing setup
-- [x] Read and analyze src/shared/Header/Links.tsx for navigation links
-- [x] Check package.json for react-router-dom dependency
-- [x] Verify path generation consistency between routes and links
-- [x] Check for potential issues (keys, error handling, etc.)
-- [x] Run development server to ensure no build errors
-- [x] Complete verification based on code analysis (browser testing skipped due to tool limitations)
+- [x] Update Articles.module.css to stack categories and preview vertically on small screens
+- [x] Make header not fixed on small screens to save space
+- [x] Adjust main content margin for non-fixed header on phones
+- [x] Reduce padding and margins on small screens for articles, categories, and menu
+- [ ] Test responsiveness on different screen sizes (320px, 375px, 425px, 768px)

@@ -64,53 +64,55 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="app-container">
       <Header
         isMenuClicked={isMenuClicked}
         setIsMenuClicked={setIsMenuClicked}
         isLoadingPages={loadingPages}
       />
-      {loadingPages ? (
-        <Loading />
-      ) : (
-        <Menu
-          isClicked={isMenuClicked}
-          setIsClicked={setIsMenuClicked}
-          pages={pages}
-        >
-          <Routes>
-            {pages.map((page) => {
-              const isHome = page.title.rendered.toLowerCase() === "home";
-              const slug = page.title.rendered
-                .toLowerCase()
-                .replace(/ /g, "-")
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "");
-              const path = isHome ? "/" : `/${slug}`;
+      <div className="main-content">
+        {loadingPages ? (
+          <Loading />
+        ) : (
+          <Menu
+            isClicked={isMenuClicked}
+            setIsClicked={setIsMenuClicked}
+            pages={pages}
+          >
+            <Routes>
+              {pages.map((page) => {
+                const isHome = page.title.rendered.toLowerCase() === "home";
+                const slug = page.title.rendered
+                  .toLowerCase()
+                  .replace(/ /g, "-")
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "");
+                const path = isHome ? "/" : `/${slug}`;
 
-              return (
-                <Route
-                  key={page.id}
-                  path={path}
-                  element={
-                    <Page
-                      title={page.title.rendered}
-                      content={page.content?.rendered ?? ""}
-                    />
-                  }
-                />
-              );
-            })}
-            <Route
-              path="/articles"
-              element={<Articles articles={articles} />}
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Menu>
-      )}
+                return (
+                  <Route
+                    key={page.id}
+                    path={path}
+                    element={
+                      <Page
+                        title={page.title.rendered}
+                        content={page.content?.rendered ?? ""}
+                      />
+                    }
+                  />
+                );
+              })}
+              <Route
+                path="/articles"
+                element={<Articles articles={articles} />}
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Menu>
+        )}
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

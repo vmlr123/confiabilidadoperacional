@@ -1,22 +1,44 @@
 .article {
-  margin: 2rem;
-  padding: 2rem;
+  margin: 1rem;
+  padding: 1rem;
   border: 0.1rem solid black;
 }
 
 .author {
-  margin: 1rem;
-  padding: 1rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
 
 .title {
-  font-size: 2rem;
-  margin: 1rem;
-  padding: 1rem;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
 }
 
 .content {
-  margin: 2rem;
+  margin: 1rem;
+}
+
+@media (max-width: 767px) {
+  .article {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .author {
+    margin: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    margin: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  .content {
+    margin: 0.5rem;
+  }
 }
 
 h5 {

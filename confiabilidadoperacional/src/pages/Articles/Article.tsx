@@ -3,15 +3,13 @@ import styles from "./Article.module.css";
 
 type Props = {
   title: ReactNode;
-  content: ReactNode;
   id?: number | string;
   date: string;
 };
 
-export default function Article({ id, title, content, date }: Props) {
+export default function Article({ id, title, date }: Props) {
   const author = "Víctor Humberto Lameda Barreno";
   const articleDate = new Date(date).toLocaleDateString();
-  console.log(content);
   return (
     <div key={id} className={styles.article}>
       <h1 className={styles.title}>{title}</h1>

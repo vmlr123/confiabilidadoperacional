@@ -1,22 +1,32 @@
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 import styles from "./Links.module.css";
 import type { PageData } from "../../App";
 
 export default function Links({
   pages,
   setIsClicked,
-  isClicked,
 }: {
   pages?: PageData[];
-  isClicked?: boolean;
   setIsClicked: (value: boolean) => void;
 }) {
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest(`.${styles.menu}`)) {
+        setIsClicked(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setIsClicked]);
+
   return (
     <div className={styles.container}>
-      <div
-        className={isClicked ? styles.clicked : styles.notclicked}
-        onClick={() => setIsClicked(false)}
-      >
+      <div className={styles.menu}>
         {pages &&
           pages.length > 0 &&
           pages.map((page) => {

@@ -24,7 +24,7 @@ export default function Articles({ articles }: { articles: ArticleData[] }) {
       }
     });
     setCategories(catSet);
-    setCategoriesWorkingArray(Array.from(categories));
+    setCategoriesWorkingArray([...catSet]);
   }, [articles]);
 
   return (
@@ -50,18 +50,10 @@ export default function Articles({ articles }: { articles: ArticleData[] }) {
         <div className={styles.preview}>
           <SelectedArticles
             articles={articles}
-            categories={categories}
-            setCategories={setCategories}
-            categoriesWorkingArray={categoriesWorkingArray}
-            setCategoriesWorkingArray={setCategoriesWorkingArray}
             searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
             sortBy={sortBy}
-            setSortBy={setSortBy}
             sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
           />
         </div>
       </div>

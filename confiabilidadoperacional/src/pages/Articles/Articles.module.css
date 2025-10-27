@@ -1,11 +1,23 @@
 .articles {
   display: flex;
+  flex-direction: column;
 }
 
 .categories {
   flex: 1;
+  margin-bottom: 1rem;
 }
 
 .preview {
   flex: 2;
+}
+
+@media (min-width: 768px) {
+  .articles {
+    flex-direction: row;
+  }
+
+  .categories {
+    margin-bottom: 0;
+  }
 }

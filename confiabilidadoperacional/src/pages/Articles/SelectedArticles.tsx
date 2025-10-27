@@ -6,56 +6,43 @@ import type { ArticleData } from "../../App";
 
 export default function SelectedArticles({
   articles,
-  categories,
-  setCategories,
-  categoriesWorkingArray,
-  setCategoriesWorkingArray,
   searchTerm,
-  setSearchTerm,
   selectedCategories,
-  setSelectedCategories,
   sortBy,
-  setSortBy,
   sortOrder,
-  setSortOrder,
 }: {
   articles: ArticleData[];
-  categories: Set<string>;
-  setCategories: (value: Set<string>) => void;
-  categoriesWorkingArray: string[];
-  setCategoriesWorkingArray: (value: string[]) => void;
   searchTerm: string;
-  setSearchTerm: (value: string) => void;
   selectedCategories: Set<string>;
-  setSelectedCategories: (value: Set<string>) => void;
   sortBy: string;
-  setSortBy: (value: string) => void;
   sortOrder: string;
-  setSortOrder: (value: string) => void;
 }) {
   const [finalArticles, setFinalArticles] = useState<ArticleData[]>([
     ...articles,
   ]);
+
   useEffect(() => {
-    const filteredArticles = finalArticles.filter((article) => {
-      // Implement your filtering logic here
-      // Example: filter by search term and category
+    const filteredArticles = articles.filter((article) => {
+      // Filter by search term
       const matchesSearch = article.title.rendered
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
+
+      // Filter by selected categories
       const articleCategories = article.class_list.slice(7);
       const selectedCategoriesArray = [...selectedCategories];
-      const matchesCategory = selectedCategoriesArray
-        ? articleCategories.some((element) =>
-            selectedCategoriesArray.includes(element)
-          )
-        : true;
+      const matchesCategory =
+        selectedCategoriesArray.length === 0
+          ? true
+          : articleCategories.some((element) =>
+              selectedCategoriesArray.includes(element)
+            );
+
       return matchesSearch && matchesCategory;
     });
 
+    // Sort the filtered articles
     const sortedArticles = [...filteredArticles].sort((a, b) => {
-      // Implement your sorting logic here
-      // Example: sort by date or title
       if (sortBy === "date") {
         const dateA: Date = new Date(a.date);
         const dateB: Date = new Date(b.date);
@@ -69,8 +56,9 @@ export default function SelectedArticles({
       }
       return 0; // No sorting
     });
-    setFinalArticles([...sortedArticles]);
-  }, []);
+
+    setFinalArticles(sortedArticles);
+  }, [articles, searchTerm, selectedCategories, sortBy, sortOrder]);
   return (
     <>
       {finalArticles.map((article) => (
@@ -80,14 +68,6 @@ export default function SelectedArticles({
             parse(
               DOMPurify.sanitize(
                 article.title.rendered || "No se pudo cargar el contenido"
-              )
-            ) as ReactNode
-          }
-          content={
-            parse(
-              DOMPurify.sanitize(
-                article.content?.rendered ||
-                  "No se pudo cargar el contenido. Por favor intente recargar la página."
               )
             ) as ReactNode
           }
