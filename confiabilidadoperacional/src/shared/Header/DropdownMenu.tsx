@@ -16,11 +16,7 @@ export default function DropdownMenu({
   return (
     <>
       {isClicked ? (
-        <Links
-          pages={pages}
-          isClicked={isClicked}
-          setIsClicked={setIsClicked}
-        />
+        <Links pages={pages} setIsClicked={setIsClicked} />
       ) : (
         children
       )}

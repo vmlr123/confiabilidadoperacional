@@ -1,6 +1,7 @@
 import parse from "html-react-parser";
 import DOMPurify from "dompurify";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
+import styles from "./Page.module.css";
 
 export default function Page({
   title,
@@ -9,16 +10,19 @@ export default function Page({
   title: string;
   content: string;
 }) {
+  const isHome = title.toLowerCase() === "home";
   return (
-    <div className="page">
-      <h2 className="title">
+    <div className={styles.page}>
+      <h2 className={styles.title}>
         {
           parse(
-            DOMPurify.sanitize(title || "No se pudo cargar el contenido.")
+            DOMPurify.sanitize(
+              (isHome ? "Inicio" : title) || "No se pudo cargar el contenido."
+            )
           ) as ReactNode
         }
       </h2>
-      <div className="content">
+      <div className={styles.content}>
         {
           parse(
             DOMPurify.sanitize(

@@ -3,6 +3,7 @@ import parse from "html-react-parser";
 import DOMPurify from "dompurify";
 import { useState, useEffect, type ReactNode } from "react";
 import type { ArticleData } from "../../App";
+import type { MediaData } from "../../App";
 
 export default function SelectedArticles({
   articles,
@@ -10,12 +11,14 @@ export default function SelectedArticles({
   selectedCategories,
   sortBy,
   sortOrder,
+  media,
 }: {
   articles: ArticleData[];
   searchTerm: string;
   selectedCategories: Set<string>;
   sortBy: string;
   sortOrder: string;
+  media: MediaData[];
 }) {
   const [finalArticles, setFinalArticles] = useState<ArticleData[]>([
     ...articles,
@@ -64,6 +67,7 @@ export default function SelectedArticles({
       {finalArticles.map((article) => (
         <Article
           key={article.id}
+          id={article.id}
           title={
             parse(
               DOMPurify.sanitize(
@@ -75,6 +79,8 @@ export default function SelectedArticles({
             new Date(article.date).toLocaleDateString() ||
             "No se pudo cargar el contenido. Por favor intente recargar la página."
           }
+          media={media}
+          featuredMediaID={article.featured_media ?? 0}
         />
       ))}
     </>

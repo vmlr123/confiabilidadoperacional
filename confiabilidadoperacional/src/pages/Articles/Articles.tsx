@@ -2,10 +2,17 @@ import { useState, useEffect } from "react";
 import CategorySidePanel from "../../features/ArticleFinder/CategorySidePanel";
 import styles from "./Articles.module.css";
 import type { ArticleData } from "../../App";
+import type { MediaData } from "../../App";
 import SelectedArticles from "./SelectedArticles";
+import { Outlet, useLocation } from "react-router-dom";
 
-export default function Articles({ articles }: { articles: ArticleData[] }) {
-  const [categories, setCategories] = useState<Set<string>>(new Set([]));
+export default function Articles({
+  articles,
+  media,
+}: {
+  articles: ArticleData[];
+  media: MediaData[];
+}) {
   const [categoriesWorkingArray, setCategoriesWorkingArray] = useState<
     string[]
   >([]);
@@ -15,6 +22,7 @@ export default function Articles({ articles }: { articles: ArticleData[] }) {
   );
   const [sortBy, setSortBy] = useState<string>("date"); // 'date', 'title'
   const [sortOrder, setSortOrder] = useState<string>("desc"); // 'asc', 'desc'
+  const currentLocation = useLocation().pathname;
 
   useEffect(() => {
     const catSet = new Set<string>();
@@ -23,40 +31,40 @@ export default function Articles({ articles }: { articles: ArticleData[] }) {
         catSet.add(category);
       }
     });
-    setCategories(catSet);
     setCategoriesWorkingArray([...catSet]);
   }, [articles]);
 
   return (
     <>
-      <div className={styles.articles}>
-        <div className={styles.categories}>
-          <CategorySidePanel
-            articles={articles}
-            categories={categories}
-            setCategories={setCategories}
-            categoriesWorkingArray={categoriesWorkingArray}
-            setCategoriesWorkingArray={setCategoriesWorkingArray}
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
-          />
+      {currentLocation === "/articles" ? (
+        <div className={styles.articles}>
+          <div className={styles.categories}>
+            <CategorySidePanel
+              categoriesWorkingArray={categoriesWorkingArray}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              sortOrder={sortOrder}
+              setSortOrder={setSortOrder}
+            />
+          </div>
+          <div className={styles.preview}>
+            <SelectedArticles
+              articles={articles}
+              searchTerm={searchTerm}
+              selectedCategories={selectedCategories}
+              sortBy={sortBy}
+              sortOrder={sortOrder}
+              media={media}
+            />
+          </div>
         </div>
-        <div className={styles.preview}>
-          <SelectedArticles
-            articles={articles}
-            searchTerm={searchTerm}
-            selectedCategories={selectedCategories}
-            sortBy={sortBy}
-            sortOrder={sortOrder}
-          />
-        </div>
-      </div>
+      ) : (
+        <Outlet />
+      )}
     </>
   );
 }

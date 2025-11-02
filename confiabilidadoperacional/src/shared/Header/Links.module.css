@@ -28,6 +28,19 @@
   box-sizing: border-box;
 }
 
+.menuItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .container {
@@ -39,6 +52,10 @@
     max-width: none;
     width: 100%;
     max-height: 95vh;
+  }
+
+  .submenu {
+    margin-left: 0.5rem;
   }
 }
 
@@ -74,7 +91,9 @@
   border-radius: 6px;
   transition: all 0.3s ease;
   text-align: center;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   box-sizing: border-box;
 }

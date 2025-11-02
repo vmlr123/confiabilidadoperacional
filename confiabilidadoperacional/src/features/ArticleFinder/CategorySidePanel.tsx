@@ -1,13 +1,8 @@
-import type { ArticleData } from "../../App";
 import styles from "./CategorySidePanel.module.css";
 import CategorySelection from "./CategorySelection";
 
 export default function CategorySidePanel({
-  articles,
-  categories,
-  setCategories,
   categoriesWorkingArray,
-  setCategoriesWorkingArray,
   searchTerm,
   setSearchTerm,
   selectedCategories,
@@ -17,11 +12,7 @@ export default function CategorySidePanel({
   sortOrder,
   setSortOrder,
 }: {
-  articles: ArticleData[];
-  categories: Set<string>;
-  setCategories: (value: Set<string>) => void;
   categoriesWorkingArray: string[];
-  setCategoriesWorkingArray: (value: string[]) => void;
   searchTerm: string;
   setSearchTerm: (value: string) => void;
   selectedCategories: Set<string>;

@@ -1,7 +1,24 @@
 .footer {
-  bottom: 0;
+  background-color: #f1f1f1;
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto;
+  border-top: 1px solid #ddd;
+  width: 100%;
 }
 
-p {
-  bottom: 0;
+.footer p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding: 1rem;
+  }
+
+  .footer p {
+    font-size: 0.8rem;
+  }
 }
