@@ -31,14 +31,20 @@ export default function Article({
       if (pictureData) {
         setPicture(pictureData.source_url);
         setAlt(pictureData.alt_text);
+      } else if (id === 119) {
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/80zz1s24nag.jpg"
+        );
       }
     }
-  }, [media, featuredMediaID]);
+  }, [media, featuredMediaID, id]);
 
   return (
     <>
       <div key={id} className={styles.article}>
-        <img src={picture} alt={alt} />
+        <Link to={slug} className={styles.image}>
+          <img src={picture} alt={alt} />
+        </Link>
         {id ? (
           <Link to={slug}>
             <h1 className={styles.title}>{title}</h1>

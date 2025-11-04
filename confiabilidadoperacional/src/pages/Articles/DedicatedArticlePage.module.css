@@ -3,6 +3,14 @@ figure {
   margin: 0 auto;
 }
 
+.pic {
+  width: 50%;
+}
+
+.date {
+  color: black;
+}
+
 table {
   border-collapse: collapse; /* Merges adjacent cell borders */
   width: auto;
@@ -26,18 +34,16 @@ th {
   font-weight: bold;
 }
 
-tr:hover {
-  background-color: #e6e6e6; /* Slightly darker gray on hover */
-}
-
 .article {
-  margin: 1rem;
+  margin: 1rem auto;
   padding: 1rem;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
+  max-width: 800px;
+  box-sizing: border-box;
 }
 
 .article:hover {
@@ -73,9 +79,9 @@ tr:hover {
 .content {
   margin: 1rem auto;
   color: #555;
-  width: 70%;
+  width: 100%;
+  max-width: 100%;
   line-height: 1.5;
-  justify-content: center;
   text-align: center;
 }
 
@@ -87,9 +93,10 @@ tr:hover {
 
 .content div {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  margin: 4rem;
+  margin: 2rem;
   font-size: x-large;
   font-weight: bold;
+  max-width: 100%;
 }
 
 .content div div {
@@ -98,8 +105,7 @@ tr:hover {
   margin: 0;
 }
 .content img {
-  width: 25%;
-  height: auto;
+  width: 70%;
   border-radius: 8px;
   margin: 0;
 }
@@ -163,7 +169,70 @@ tr:hover {
   }
 
   .content {
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
+    width: 90%;
+  }
+
+  .content div {
+    margin: 1rem;
+  }
+
+  .content img {
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .article {
+    margin: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .author {
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+  }
+
+  .content {
+    margin: 1.5rem auto;
+    width: 80%;
+  }
+
+  .content img {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .article {
+    margin: 2rem;
+    padding: 2rem;
+  }
+
+  .author {
+    margin: 1rem 0;
+    padding: 1rem 0;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin: 1rem 0;
+    padding: 1rem 0;
+  }
+
+  .content {
+    margin: 2rem auto;
+    width: 70%;
+  }
+
+  .content img {
+    width: 25%;
   }
 }
 

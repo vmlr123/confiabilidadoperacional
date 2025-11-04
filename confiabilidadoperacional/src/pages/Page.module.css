@@ -1,5 +1,5 @@
 .page {
-  padding: 2rem;
+  padding: 0 2rem 2rem;
   text-align: left;
   max-width: 800px;
   margin: 0 auto;
@@ -8,13 +8,13 @@
 .title {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: --text-color;
 }
 
 .content {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #555;
+  color: --text-color;
 }
 
 .content img {
@@ -30,7 +30,7 @@
 .content h1,
 .content h2,
 .content h3 {
-  color: #333;
+  color: --text-color;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }

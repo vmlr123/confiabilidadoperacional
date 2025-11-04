@@ -7,10 +7,21 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 126, 0.678);
+  background-color: var(--header-bg);
   z-index: 100;
   box-sizing: border-box;
   padding: 0.5rem;
+  gap: 1rem;
+}
+
+.page {
+  height: 2rem;
+  width: auto;
+}
+
+.icon {
+  height: 100%;
+  width: auto;
 }
 
 @media (max-width: 767px) {
@@ -26,16 +37,10 @@
   padding: 2rem;
 }
 
-.page {
-  font-size: 2rem;
-  margin: 1rem;
-  color: black;
-}
-
 a {
-  color: black;
+  color: var(--text-color);
   padding: 1rem 2rem;
-  background-color: rgba(117, 190, 255, 0.5);
+  background-color: var(--button-bg);
   border-radius: 5rem;
   -webkit-border-radius: 5rem;
   -moz-border-radius: 5rem;
@@ -46,12 +51,34 @@ a {
 }
 
 a:hover {
-  background-color: rgba(117, 190, 255, 0.7);
+  background-color: var(--button-hover);
+  color: var(--text-color);
 }
 
 @media (max-width: 767px) {
   a {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+  }
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.themeToggle:hover {
+  background-color: rgba(117, 190, 255, 0.3);
+}
+
+@media (max-width: 767px) {
+  .themeToggle {
+    font-size: 1.2rem;
+    padding: 0.3rem;
   }
 }

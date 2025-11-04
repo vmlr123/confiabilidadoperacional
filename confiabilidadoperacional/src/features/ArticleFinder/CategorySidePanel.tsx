@@ -22,8 +22,6 @@ export default function CategorySidePanel({
   sortOrder: string;
   setSortOrder: (value: string) => void;
 }) {
-  console.log(categoriesWorkingArray);
-
   return (
     <>
       <form className={styles.categories}>

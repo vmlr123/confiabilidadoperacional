@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import voca from "voca";
 
 export default function CategorySelection({
   category,
@@ -40,7 +41,14 @@ export default function CategorySelection({
           checked={isChecked}
           onChange={handleChange}
         />
-        <label htmlFor={category}>{category}</label>
+        <label htmlFor={category}>
+          {voca.titleCase(
+            category
+              .replace(/-/g, " ")
+              .replace(/category/g, "")
+              .replace(/tag/g, "")
+          )}
+        </label>
         <br />
       </div>
     </>

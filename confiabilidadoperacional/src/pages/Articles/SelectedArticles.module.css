@@ -2,23 +2,167 @@
   margin: 2rem;
   padding: 2rem;
   border: 0.1rem solid black;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.article:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .author {
   margin: 1rem;
   padding: 1rem;
+  font-style: italic;
+  --text-color: #333333;
 }
 
 .title {
   font-size: 2rem;
   margin: 1rem;
   padding: 1rem;
+  color: --text-color;
+}
+
+.title a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.title a:hover {
+  color: #007bff;
 }
 
 .content {
   margin: 2rem;
+  color: #555;
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content p {
+  margin-bottom: 1rem;
+}
+
+.content h1,
+.content h2,
+.content h3 {
+  color: #333;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content ul,
+.content ol {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.content li {
+  margin-bottom: 0.5rem;
+}
+
+.content a {
+  color: #007bff;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.content a:hover {
+  border-bottom-color: #007bff;
+}
+
+.content button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0.5rem 0;
+}
+
+.content button:hover {
+  background-color: #0056b3;
 }
 
 h5 {
   font-weight: normal;
+}
+
+@media (max-width: 767px) {
+  .article {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .author {
+    margin: 0.25rem 0;
+    padding: 0.25rem 0;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    margin: 0.25rem 0;
+    padding: 0.25rem 0;
+  }
+
+  .content {
+    margin: 0.5rem 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .article {
+    margin: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .author {
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+  }
+
+  .content {
+    margin: 1.5rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .article {
+    margin: 2rem;
+    padding: 2rem;
+  }
+
+  .author {
+    margin: 1rem 0;
+    padding: 1rem 0;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin: 1rem 0;
+    padding: 1rem 0;
+  }
+
+  .content {
+    margin: 2rem 0;
+  }
 }

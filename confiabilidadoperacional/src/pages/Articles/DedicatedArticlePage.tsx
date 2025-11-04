@@ -32,15 +32,19 @@ export default function DedicatedArticlePage({
       if (pictureData) {
         setPicture(pictureData.source_url);
         setAlt(pictureData.alt_text);
+      } else if (id === 119) {
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/80zz1s24nag.jpg"
+        );
       }
     }
-  }, [media, featuredMediaID]);
+  }, [featuredMediaID, media, picture, id]);
 
   return (
     <div key={id} className={styles.article}>
-      {picture && <img src={picture} alt={alt} />}
+      {picture && <img src={picture} alt={alt} className={styles.pic} />}
       <h1 className={styles.title}>{title}</h1>
-      <p>{date}</p>
+      <p className={styles.date}>{date}</p>
       <h5 className={styles.author}>
         <em>Autor: {author}</em>
       </h5>

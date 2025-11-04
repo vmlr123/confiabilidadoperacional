@@ -1,8 +1,42 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --header-bg: rgba(0, 0, 126, 0.678);
+  --menu-bg: #ffffff;
+  --link-color: #333333;
+  --link-hover: #007bff;
+  --button-bg: rgba(117, 190, 255, 0.5);
+  --button-hover: rgba(117, 190, 255, 0.7);
+  --content-text: #555;
+  --content-bg: #ffffff;
+  --menu-link-bg-hover: #f0f0f0;
+  --menu-link-color-hover: #007bff;
+}
+
+.dark {
+  --bg-color: #1a1a1a;
+  --text-color: #ffffff;
+  --header-bg: rgba(0, 0, 126, 0.8);
+  --menu-bg: #2a2a2a;
+  --link-color: #ffffff;
+  --link-hover: #4dabf7;
+  --button-bg: rgba(77, 144, 254, 0.5);
+  --button-hover: rgba(77, 144, 254, 0.7);
+  --content-text: #e0e0e0;
+  --content-bg: #1a1a1a;
+  --menu-link-bg-hover: #404040;
+  --menu-link-color-hover: #4dabf7;
+}
+
 #root {
   width: 100%;
+  overflow-x: hidden;
   text-align: center;
   font-family: "Arial", sans-serif;
   line-height: 1.6;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
@@ -43,7 +77,8 @@
 .page .content {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #555;
+  color: var(--content-text);
+  background-color: var(--content-bg);
 }
 
 .page .content img {
@@ -61,7 +96,7 @@
 .page .content h1,
 .page .content h2,
 .page .content h3 {
-  color: #333;
+  color: var(--text-color);
   margin-top: 2rem;
   margin-bottom: 1rem;
 }

@@ -11,6 +11,8 @@ import Menu from "./pages/Menu/Menu";
 import DedicatedArticlePage from "./pages/Articles/DedicatedArticlePage";
 import Home from "./pages/Home";
 
+export type Theme = "light" | "dark";
+
 export type ArticleData = {
   id?: number;
   title: { rendered: string };
@@ -37,6 +39,22 @@ function App() {
   const [media, setMedia] = useState<MediaData[]>([]);
   const [loadingPages, setLoadingPages] = useState<boolean>(true);
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
+  const [theme, setTheme] = useState<Theme>("light");
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.body.classList.toggle("dark", newTheme === "dark");
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as Theme;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.body.classList.toggle("dark", savedTheme === "dark");
+    }
+  }, []);
 
   async function fetchArticles(): Promise<void> {
     try {
@@ -62,9 +80,9 @@ function App() {
       }
       const data = await response.json();
       setPages(data);
-      setLoadingPages(false);
     } catch (error) {
       console.error("Error fetching page data:", error);
+    } finally {
       setLoadingPages(false);
     }
   }
@@ -95,6 +113,8 @@ function App() {
         isMenuClicked={isMenuClicked}
         setIsMenuClicked={setIsMenuClicked}
         isLoadingPages={loadingPages}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
       <div className="main-content">
         {loadingPages ? (

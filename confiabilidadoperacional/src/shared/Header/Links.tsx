@@ -13,7 +13,7 @@ export default function Links({
   setIsClicked: (value: boolean) => void;
 }) {
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as Element;
       if (!target.closest(`.${styles.menu}`)) {
         setIsClicked(false);
@@ -21,8 +21,10 @@ export default function Links({
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [setIsClicked]);
 
@@ -89,6 +91,13 @@ export default function Links({
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
+        <button
+          className={styles.closeButton}
+          onClick={() => setIsClicked(false)}
+          aria-label="Cerrar menú"
+        >
+          ✕
+        </button>
         {pageHierarchy.map((page) => renderMenuItem(page))}
         <NavLink
           key="articles"
@@ -99,6 +108,16 @@ export default function Links({
           onClick={() => setIsClicked(false)}
         >
           Artículos por categoría
+        </NavLink>
+        <NavLink
+          key="home"
+          to="/"
+          className={({ isActive }) =>
+            isActive ? styles.active : styles.inactive
+          }
+          onClick={() => setIsClicked(false)}
+        >
+          Inicio
         </NavLink>
       </div>
     </div>
