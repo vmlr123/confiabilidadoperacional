@@ -4,7 +4,8 @@ figure {
 }
 
 .pic {
-  width: 50%;
+  max-width: 100%;
+  height: auto;
 }
 
 .date {

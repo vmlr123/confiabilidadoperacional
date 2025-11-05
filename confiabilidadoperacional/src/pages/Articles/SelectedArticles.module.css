@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+.article img {
+  max-width: 100%;
+  height: auto;
+}
+
 .article:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

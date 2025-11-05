@@ -1,5 +1,4 @@
-.header {
-  position: fixed;
+nav {
   top: 0;
   left: 0;
   width: 100%;
@@ -14,18 +13,73 @@
   gap: 1rem;
 }
 
+.currentinfo {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: space-between;
+  background-color: rgb(15, 15, 15);
+}
+
+.phrase {
+  color: white;
+}
+
+.today {
+  margin: 0 2rem;
+}
+
+.news {
+  margin: 0 1rem;
+}
+
+.trendingstatic {
+  padding: 0 1rem;
+  background-color: black;
+  border: solid 1px white;
+  color: white;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.bannerimg {
+  height: 8rem;
+  width: 8rem;
+  position: relative;
+}
+
+.infront {
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.425);
+  padding: 2rem;
+}
+
+.banner {
+  background-image: url("https://confiabilidadoperacional.com/wp-content/uploads/2025/10/icolttjygaa-1.jpg");
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
 .page {
-  height: 2rem;
-  width: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .icon {
-  height: 100%;
-  width: auto;
+  width: 2rem;
+  height: 2rem;
 }
 
 @media (max-width: 767px) {
-  .header {
+  nav {
     position: static;
     background-color: rgba(0, 0, 126, 0.9);
     padding: 1rem 0.5rem;

@@ -1,8 +1,18 @@
 .page {
-  padding: 0 2rem 2rem;
   text-align: left;
   max-width: 800px;
-  margin: 0 auto;
+  overflow: auto;
+}
+
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.content td,
+.content th {
+  word-wrap: break-word;
 }
 
 .title {
@@ -31,18 +41,7 @@
 .content h2,
 .content h3 {
   color: --text-color;
-  margin-top: 2rem;
   margin-bottom: 1rem;
-}
-
-.content ul,
-.content ol {
-  margin-left: 2rem;
-  margin-bottom: 1rem;
-}
-
-.content li {
-  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 767px) {

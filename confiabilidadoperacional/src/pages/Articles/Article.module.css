@@ -1,5 +1,13 @@
 .image {
   background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
 }
 
 .article {
