@@ -30,21 +30,27 @@ export default function Article({
       const pictureData = media.find((p) => p.id === featuredMediaID);
       if (pictureData) {
         setPicture(pictureData.source_url);
-        setAlt(pictureData.alt_text);
+        setAlt(
+          pictureData.alt_text ||
+            (typeof title === "string" ? title : "Article image")
+        );
       } else if (id === 119) {
         setPicture(
           "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/80zz1s24nag.jpg"
         );
+        setAlt(typeof title === "string" ? title : "Article image");
       }
     }
-  }, [media, featuredMediaID, id]);
+  }, [media, featuredMediaID, id, title]);
 
   return (
     <>
       <div key={id} className={styles.article}>
-        <Link to={slug} className={styles.image}>
-          <img src={picture} alt={alt} />
-        </Link>
+        {picture && (
+          <Link to={slug} className={styles.image}>
+            <img src={picture} alt={alt} />
+          </Link>
+        )}
         {id ? (
           <Link to={slug}>
             <h1 className={styles.title}>{title}</h1>
@@ -53,9 +59,9 @@ export default function Article({
           <h1 className={styles.title}>{title}</h1>
         )}
         <p>{articleDate}</p>
-        <h5 className={styles.author}>
+        <p className={styles.author}>
           <em>Autor: {author}</em>
-        </h5>
+        </p>
       </div>
     </>
   );

@@ -116,7 +116,7 @@
 
 .container a:hover {
   background-color: var(--menu-link-bg-hover);
-  color: var(--menu-link-color-hover);
+  color: white;
   transform: translateY(-2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -148,5 +148,5 @@
 
 .closeButton:hover {
   background-color: var(--menu-link-bg-hover);
-  color: var(--menu-link-color-hover);
+  color: white;
 }

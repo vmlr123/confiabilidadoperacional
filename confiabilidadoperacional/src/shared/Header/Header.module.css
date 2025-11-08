@@ -6,11 +6,24 @@ nav {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: var(--header-bg);
+  background: var(--header-bg);
   z-index: 100;
   box-sizing: border-box;
   padding: 0.5rem;
   gap: 1rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.trendingnews {
+  color: white;
+  margin: 1rem;
+}
+
+.news {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .currentinfo {
@@ -21,12 +34,30 @@ nav {
   background-color: rgb(15, 15, 15);
 }
 
+.currentdate,
+.currenttime,
+.currenttemp {
+  margin: 1rem;
+}
+
+.currenttime {
+  background-color: #1b8415;
+  padding: 0 1rem;
+  font-weight: bold;
+  color: white;
+  font-weight: bold;
+}
+
 .phrase {
   color: white;
 }
 
 .today {
   margin: 0 2rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .news {
@@ -41,21 +72,40 @@ nav {
   font-weight: bold;
 }
 
+.trendingnews {
+  font-family: monospace;
+  border-right: 2px solid white;
+  animation: blink-caret 1s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .bannerimg {
   height: 8rem;
   width: 8rem;
   position: relative;
+  opacity: 1 !important;
 }
 
 .infront {
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.425);
+  background-color: rgba(0, 0, 0, 0.671);
   padding: 2rem;
+  position: relative;
 }
 
 .banner {
@@ -66,6 +116,14 @@ nav {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  position: relative;
+}
+
+img {
+  -webkit-user-drag: none; /* For Chrome, Safari, and Edge */
+  -moz-user-drag: none; /* For Firefox */
+  -ms-user-drag: none; /* For Internet Explorer/Edge */
+  user-drag: none; /* Standard property */
 }
 
 .page {
@@ -76,6 +134,7 @@ nav {
 .icon {
   width: 2rem;
   height: 2rem;
+  z-index: 100;
 }
 
 @media (max-width: 767px) {
@@ -83,6 +142,9 @@ nav {
     position: static;
     background-color: rgba(0, 0, 126, 0.9);
     padding: 1rem 0.5rem;
+  }
+  .linksdesktop {
+    display: none;
   }
 }
 
@@ -94,25 +156,35 @@ nav {
 a {
   color: var(--text-color);
   padding: 1rem 2rem;
-  background-color: var(--button-bg);
+  background: var(--button-bg);
   border-radius: 5rem;
   -webkit-border-radius: 5rem;
   -moz-border-radius: 5rem;
   -ms-border-radius: 5rem;
   -o-border-radius: 5rem;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 
 a:hover {
-  background-color: var(--button-hover);
+  background: var(--button-hover);
   color: var(--text-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 767px) {
   a {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+  }
+  .news {
+    display: none;
+  }
+  .today {
+    left: 0;
+    right: auto;
   }
 }
 
@@ -123,11 +195,13 @@ a:hover {
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
-  transition: background-color 0.3s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 
 .themeToggle:hover {
   background-color: rgba(117, 190, 255, 0.3);
+  transform: scale(1.1);
 }
 
 @media (max-width: 767px) {

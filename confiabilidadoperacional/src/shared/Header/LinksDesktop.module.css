@@ -1,0 +1,66 @@
+.navLinks {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.navLinks a {
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.navLinks a:hover {
+  background-color: var(--hover-bg);
+}
+
+.active {
+  background-color: var(--active-bg);
+  color: var(--active-text);
+}
+
+.inactive {
+  color: var(--text-color);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0);
+  --menu-width: 160px;
+  width: var(--menu-width);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 5px;
+  padding: 0.5rem 0;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
+
+.dropdownContent .dropdown {
+  position: relative;
+}
+
+.dropdownContent .dropdownContent {
+  left: 0;
+  top: 100%;
+  width: calc(100% - 1rem);
+}
+
+.dropdownContent a {
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s ease;
+}

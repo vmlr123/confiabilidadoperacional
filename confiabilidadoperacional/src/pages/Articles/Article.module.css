@@ -48,7 +48,8 @@
   transition: color 0.3s ease;
 }
 
-.title a:hover {
+.title a:hover,
+.title a:focus {
   color: #007bff;
 }
 

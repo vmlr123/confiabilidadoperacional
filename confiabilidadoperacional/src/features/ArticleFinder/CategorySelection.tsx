@@ -9,7 +9,7 @@ export default function CategorySelection({
   category: string;
   selectedCategories: Set<string>;
   setSelectedCategories: (value: Set<string>) => void;
-}) {
+}): React.JSX.Element {
   const [isChecked, setIsChecked] = useState<boolean>(
     selectedCategories.has(category)
   );
@@ -19,12 +19,12 @@ export default function CategorySelection({
   }, [selectedCategories, category]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
+    const checked: boolean = e.target.checked;
     setIsChecked(checked);
     if (checked) {
       setSelectedCategories(new Set([...selectedCategories, category]));
     } else {
-      const newSet = new Set(selectedCategories);
+      const newSet: Set<string> = new Set(selectedCategories);
       newSet.delete(category);
       setSelectedCategories(newSet);
     }

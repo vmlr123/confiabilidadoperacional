@@ -66,8 +66,8 @@ function App() {
       }
       const data = await response.json();
       setArticles(data);
-    } catch (error) {
-      console.error("Error fetching article data:", error);
+    } catch {
+      // Error handled silently
     }
   }
   async function fetchPages(): Promise<void> {
@@ -80,8 +80,8 @@ function App() {
       }
       const data = await response.json();
       setPages(data);
-    } catch (error) {
-      console.error("Error fetching page data:", error);
+    } catch {
+      // Error handled silently
     } finally {
       setLoadingPages(false);
     }
@@ -96,8 +96,8 @@ function App() {
       }
       const data = await response.json();
       setMedia(data);
-    } catch (error) {
-      console.error("Error fetching media data:", error);
+    } catch {
+      // Error handled silently
     }
   }
 
@@ -115,6 +115,8 @@ function App() {
         isLoadingPages={loadingPages}
         theme={theme}
         toggleTheme={toggleTheme}
+        articles={articles}
+        pages={pages}
       />
       <div className="main-content">
         {loadingPages ? (

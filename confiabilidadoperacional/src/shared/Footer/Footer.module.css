@@ -5,6 +5,7 @@
   margin-top: auto;
   border-top: 1px solid #ddd;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .footer p {
@@ -16,9 +17,12 @@
 @media (max-width: 767px) {
   .footer {
     padding: 1rem;
+    overflow-x: hidden;
   }
 
   .footer p {
     font-size: 0.8rem;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 }

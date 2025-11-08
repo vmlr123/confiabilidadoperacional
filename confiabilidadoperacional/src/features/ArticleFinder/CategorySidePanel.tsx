@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./CategorySidePanel.module.css";
 import CategorySelection from "./CategorySelection";
 
@@ -21,7 +22,7 @@ export default function CategorySidePanel({
   setSortBy: (value: string) => void;
   sortOrder: string;
   setSortOrder: (value: string) => void;
-}) {
+}): React.JSX.Element {
   return (
     <>
       <form className={styles.categories}>
@@ -30,6 +31,7 @@ export default function CategorySidePanel({
           {categoriesWorkingArray.map((category) => {
             return (
               <CategorySelection
+                key={category}
                 category={category}
                 selectedCategories={selectedCategories}
                 setSelectedCategories={setSelectedCategories}

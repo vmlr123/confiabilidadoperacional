@@ -5,6 +5,8 @@ import { useState, useEffect, type ReactNode } from "react";
 import type { ArticleData } from "../../App";
 import type { MediaData } from "../../App";
 
+const ITEMS_PER_PAGE = 3;
+
 export default function SelectedArticles({
   articles,
   searchTerm,
@@ -23,6 +25,7 @@ export default function SelectedArticles({
   const [finalArticles, setFinalArticles] = useState<ArticleData[]>([
     ...articles,
   ]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     const filteredArticles = articles.filter((article) => {
@@ -61,10 +64,16 @@ export default function SelectedArticles({
     });
 
     setFinalArticles(sortedArticles);
+    setCurrentPage(1); // Reset to first page when filters change
   }, [articles, searchTerm, selectedCategories, sortBy, sortOrder]);
+
+  const totalPages = Math.ceil(finalArticles.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedArticles = finalArticles.slice(startIndex, endIndex);
   return (
     <>
-      {finalArticles.map((article) => (
+      {paginatedArticles.map((article) => (
         <Article
           key={article.id}
           id={article.id}
@@ -83,6 +92,45 @@ export default function SelectedArticles({
           featuredMediaID={article.featured_media ?? 0}
         />
       ))}
+      {totalPages > 1 && (
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+          <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            style={{
+              margin: "0 0.5rem",
+              padding: "0.5rem 1rem",
+              background: "var(--button-bg)",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: currentPage === 1 ? "not-allowed" : "pointer",
+            }}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage(Math.min(totalPages, currentPage + 1))
+            }
+            disabled={currentPage === totalPages}
+            style={{
+              margin: "0 0.5rem",
+              padding: "0.5rem 1rem",
+              background: "var(--button-bg)",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+            }}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </>
   );
 }
