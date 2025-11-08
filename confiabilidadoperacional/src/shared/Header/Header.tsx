@@ -1,24 +1,21 @@
 import styles from "./Header.module.css";
-import type { ArticleData } from "../../App";
-import Links from "./Links";
-import { NavLink } from "react-router-dom";
 
-export default function Header({ pages }: { pages?: ArticleData[] }) {
+export default function Header({
+  isMenuClicked,
+  setIsMenuClicked,
+  isLoadingPages,
+}: {
+  isMenuClicked: boolean;
+  setIsMenuClicked: (value: boolean) => void;
+  isLoadingPages: boolean;
+}) {
   return (
     <>
       <header className={styles.header}>
-        <NavLink
-          to="/menu"
-          className={({ isActive }) =>
-            isActive ? styles.active : styles.inactive
-          }
-        >
-          Menú
-        </NavLink>
+        {isLoadingPages ? null : (
+          <a onClick={() => setIsMenuClicked(!isMenuClicked)}>Menú</a>
+        )}
         <h1 className={styles.page}>Confiabilidad Operacional</h1>
-        <nav className={styles.nav}>
-          <Links pages={pages} />
-        </nav>
       </header>
     </>
   );

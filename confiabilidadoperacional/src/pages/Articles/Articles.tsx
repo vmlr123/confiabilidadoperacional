@@ -1,37 +1,70 @@
-import Article from "./Article";
-import parse from "html-react-parser";
-import DOMPurify from "dompurify";
-import type { ReactNode } from "react";
+import { useState, useEffect } from "react";
+import CategorySidePanel from "../../features/ArticleFinder/CategorySidePanel";
+import styles from "./Articles.module.css";
+import type { ArticleData } from "../../App";
+import type { MediaData } from "../../App";
+import SelectedArticles from "./SelectedArticles";
+import { Outlet, useLocation } from "react-router-dom";
 
-type ArticleType = {
-  id?: number;
-  title: { rendered: string };
-  content?: { rendered: string };
-};
+export default function Articles({
+  articles,
+  media,
+}: {
+  articles: ArticleData[];
+  media: MediaData[];
+}) {
+  const [categoriesWorkingArray, setCategoriesWorkingArray] = useState<
+    string[]
+  >([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
+    new Set([])
+  );
+  const [sortBy, setSortBy] = useState<string>("date"); // 'date', 'title'
+  const [sortOrder, setSortOrder] = useState<string>("desc"); // 'asc', 'desc'
+  const currentLocation = useLocation().pathname;
 
-export default function Articles({ articles }: { articles: ArticleType[] }) {
+  useEffect(() => {
+    const catSet = new Set<string>();
+    articles.forEach((article) => {
+      for (const category of article.class_list.slice(7)) {
+        catSet.add(category);
+      }
+    });
+    setCategoriesWorkingArray([...catSet]);
+  }, [articles]);
+
   return (
     <>
-      {articles.map((article) => (
-        <Article
-          key={article.id}
-          title={
-            parse(
-              DOMPurify.sanitize(
-                article.title.rendered || "No se pudo cargar el contenido"
-              )
-            ) as ReactNode
-          }
-          content={
-            parse(
-              DOMPurify.sanitize(
-                article.content?.rendered ||
-                  "No se pudo cargar el contenido. Por favor intente recargar la página."
-              )
-            ) as ReactNode
-          }
-        />
-      ))}
+      {currentLocation === "/articles" ? (
+        <div className={styles.articles}>
+          <div className={styles.categories}>
+            <CategorySidePanel
+              categoriesWorkingArray={categoriesWorkingArray}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              sortOrder={sortOrder}
+              setSortOrder={setSortOrder}
+            />
+          </div>
+          <div className={styles.preview}>
+            <SelectedArticles
+              articles={articles}
+              searchTerm={searchTerm}
+              selectedCategories={selectedCategories}
+              sortBy={sortBy}
+              sortOrder={sortOrder}
+              media={media}
+            />
+          </div>
+        </div>
+      ) : (
+        <Outlet />
+      )}
     </>
   );
 }

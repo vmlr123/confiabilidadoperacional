@@ -1,3 +1,35 @@
+figure {
+  width: 100%;
+  margin: 0 auto;
+}
+
+table {
+  border-collapse: collapse; /* Merges adjacent cell borders */
+  width: auto;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensures border-radius is visible */
+  margin: 0 auto;
+}
+
+th,
+td {
+  border: 1px solid #ddd; /* Light gray border */
+  padding: 8px; /* Spacing inside cells */
+  text-align: left; /* Align text to the left */
+}
+
+th {
+  background-color: #f2f2f2; /* Light gray background for headers */
+  color: black; /* Black text for headers */
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #e6e6e6; /* Slightly darker gray on hover */
+}
+
 .article {
   margin: 1rem;
   padding: 1rem;
@@ -39,20 +71,41 @@
 }
 
 .content {
-  margin: 1rem 0;
+  margin: 1rem auto;
   color: #555;
+  width: 70%;
+  line-height: 1.5;
+  justify-content: center;
+  text-align: center;
 }
 
+.content table {
+  display: inline-table;
+  margin: 0;
+  text-align: left;
+}
+
+.content div {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  margin: 4rem;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.content div div {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+}
 .content img {
-  max-width: 100%;
+  width: 25%;
   height: auto;
-  margin: 1rem 0;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0;
 }
 
 .content p {
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 .content h1,
@@ -78,25 +131,18 @@
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s ease;
-}
-
-.content a:hover {
-  border-bottom-color: #007bff;
+  background-color: rgba(255, 255, 255, 0);
+  margin: 0;
 }
 
 .content button {
-  background-color: #007bff;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 0.5rem 0;
-}
-
-.content button:hover {
-  background-color: #0056b3;
+  margin: 0;
 }
 
 @media (max-width: 767px) {

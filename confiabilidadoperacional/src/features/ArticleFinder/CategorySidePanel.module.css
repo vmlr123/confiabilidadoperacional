@@ -1,0 +1,17 @@
+.categories legend {
+  font-size: large;
+}
+
+.categories {
+  margin: 1rem;
+}
+
+@media (max-width: 767px) {
+  .categories legend {
+    font-size: medium;
+  }
+
+  .categories {
+    margin: 0.5rem;
+  }
+}
