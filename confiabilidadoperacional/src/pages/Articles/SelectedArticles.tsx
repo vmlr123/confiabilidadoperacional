@@ -85,11 +85,16 @@ export default function SelectedArticles({
             ) as ReactNode
           }
           date={
-            new Date(article.date).toLocaleDateString() ||
+            new Date(article.date).toLocaleDateString("es-ES") ||
             "No se pudo cargar el contenido. Por favor intente recargar la página."
           }
           media={media}
           featuredMediaID={article.featured_media ?? 0}
+          description={parse(
+              DOMPurify.sanitize(
+                article.excerpt.rendered || "No se pudo cargar el contenido"
+              )
+            ) as ReactNode}
         />
       ))}
       {totalPages > 1 && (

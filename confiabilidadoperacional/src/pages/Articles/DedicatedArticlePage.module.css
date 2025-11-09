@@ -1,15 +1,10 @@
-figure {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.pic {
-  max-width: 100%;
-  height: auto;
-}
-
 .date {
   color: black;
+}
+
+figure img,
+.pic {
+  width: 100%;
 }
 
 table {
@@ -105,11 +100,6 @@ th {
   box-shadow: none;
   margin: 0;
 }
-.content img {
-  width: 70%;
-  border-radius: 8px;
-  margin: 0;
-}
 
 .content p {
   margin: 0;
@@ -177,10 +167,6 @@ th {
   .content div {
     margin: 1rem;
   }
-
-  .content img {
-    width: 50%;
-  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -204,10 +190,6 @@ th {
     margin: 1.5rem auto;
     width: 80%;
   }
-
-  .content img {
-    width: 40%;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -230,10 +212,6 @@ th {
   .content {
     margin: 2rem auto;
     width: 70%;
-  }
-
-  .content img {
-    width: 25%;
   }
 }
 

@@ -2,8 +2,8 @@ import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import type { Theme, ArticleData, PageData } from "../../App";
 import { useEffect, useState, useRef } from "react";
-import Draggable from "react-draggable";
 import LinksDesktop from "./LinksDesktop";
+import Draggable from "react-draggable";
 
 interface WeatherData {
   temperature: number;
@@ -155,14 +155,15 @@ export default function Header({
         </div>
         <div ref={bannerRef} className={styles.banner}>
           <div className={styles.infront}>
-            {/* @ts-expect-error react-draggable bounds accepts RefObject */}
-            <Draggable bounds={nodeRef} nodeRef={nodeRef}>
+            <Draggable nodeRef={nodeRef}>
               <div ref={nodeRef}>
-                <img
-                  src="https://confiabilidadoperacional.com/wp-content/uploads/2025/10/cropped-LOGO-CO-3D-W.png"
-                  alt="White website icon"
-                  className={styles.bannerimg}
-                />
+                <Link to="/" className={styles.draggableimglink}>
+                  <img
+                    src="https://confiabilidadoperacional.com/wp-content/uploads/2025/10/cropped-LOGO-CO-3D-W.png"
+                    alt="White website icon"
+                    className={styles.bannerimg}
+                  />
+                </Link>
               </div>
             </Draggable>
             <p className={styles.phrase}>Hacia la Excelencia Operacional.</p>
@@ -171,9 +172,14 @@ export default function Header({
         <nav>
           {isLoadingPages ? null : (
             <>
-              <a onClick={() => setIsMenuClicked(!isMenuClicked)}>Menú</a>
+              <a
+                onClick={() => setIsMenuClicked(!isMenuClicked)}
+                className={styles.menubutton}
+              >
+                Menú
+              </a>
               <div className={styles.linksdesktop}>
-              <LinksDesktop pages={pages} />
+                <LinksDesktop pages={pages} />
               </div>
               <button className={styles.themeToggle} onClick={toggleTheme}>
                 {theme === "light" ? "🌙" : "☀️"}

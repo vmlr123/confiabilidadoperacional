@@ -1,11 +1,16 @@
 .articles {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   padding: 1rem;
-  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .articles {
+  max-width: 1200px;
+  }
 }
 
 .articles img {
@@ -24,7 +29,7 @@
 }
 
 .preview {
-  flex: 2;
+  flex: 4;
   padding: 1rem;
   background-color: var(--bg-color);
 }

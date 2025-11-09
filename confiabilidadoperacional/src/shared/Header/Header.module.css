@@ -101,6 +101,14 @@ nav {
   opacity: 1 !important;
 }
 
+.draggableimglink,
+.draggableimglink a,
+.draggableimglink a:hover,
+.draggableimglink:hover {
+  background: rgba(255, 255, 255, 0);
+  box-shadow: none;
+}
+
 .infront {
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.671);
@@ -117,13 +125,6 @@ nav {
   background-repeat: no-repeat;
   background-position: center center;
   position: relative;
-}
-
-img {
-  -webkit-user-drag: none; /* For Chrome, Safari, and Edge */
-  -moz-user-drag: none; /* For Firefox */
-  -ms-user-drag: none; /* For Internet Explorer/Edge */
-  user-drag: none; /* Standard property */
 }
 
 .page {
@@ -143,7 +144,22 @@ img {
     background-color: rgba(0, 0, 126, 0.9);
     padding: 1rem 0.5rem;
   }
+}
+
+/* Media query for tablets and smaller */
+@media (max-width: 1200px) {
   .linksdesktop {
+    display: none;
+  }
+}
+
+/* Media query for laptops and bigger */
+@media (min-width: 1201px) {
+  .menubutton {
+    display: none;
+  }
+
+  .page {
     display: none;
   }
 }
@@ -197,6 +213,13 @@ a:hover {
   border-radius: 50%;
   transition: var(--transition);
   box-shadow: var(--shadow);
+}
+img,
+a {
+  -webkit-user-drag: none; /* For Chrome, Safari, and Edge */
+  -moz-user-drag: none; /* For Firefox */
+  -ms-user-drag: none; /* For Internet Explorer/Edge */
+  user-drag: none; /* Standard property */
 }
 
 .themeToggle:hover {

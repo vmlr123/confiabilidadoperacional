@@ -1,3 +1,13 @@
+.picture {
+  height: 100%;
+  width: 100%;
+  margin: 1rem;
+}
+
+.info {
+  height: 100%;
+}
+
 .image {
   background-color: transparent;
   display: flex;
@@ -10,6 +20,10 @@
   height: auto;
 }
 
+.button {
+  padding: 0.1rem;
+}
+
 .article {
   margin: 1rem;
   padding: 1rem;
@@ -20,6 +34,18 @@
   transition: box-shadow 0.3s ease;
   max-width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  min-height: 300px;
+}
+
+@media (max-width: 768px) {
+  .article {
+    flex-direction: column;
+  }
+  .picture {
+    margin: 1rem 0;
+  }
 }
 
 .article:hover {
@@ -30,7 +56,7 @@
   margin: 0.5rem 0;
   padding: 0.5rem 0;
   font-style: italic;
-  --text-color: #333333;
+  color: --text-color;
 }
 
 .title {

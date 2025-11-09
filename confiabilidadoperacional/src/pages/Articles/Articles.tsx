@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CategorySidePanel from "../../features/ArticleFinder/CategorySidePanel";
 import styles from "./Articles.module.css";
 import type { ArticleData } from "../../App";
@@ -6,7 +6,7 @@ import type { MediaData } from "../../App";
 import SelectedArticles from "./SelectedArticles";
 import { Outlet, useLocation } from "react-router-dom";
 
-export default function Articles({
+const Articles = React.memo(function Articles({
   articles,
   media,
 }: {
@@ -38,6 +38,16 @@ export default function Articles({
     <>
       {currentLocation === "/articles" ? (
         <div className={styles.articles}>
+          <div className={styles.preview}>
+            <SelectedArticles
+              articles={articles}
+              searchTerm={searchTerm}
+              selectedCategories={selectedCategories}
+              sortBy={sortBy}
+              sortOrder={sortOrder}
+              media={media}
+            />
+          </div>
           <div className={styles.categories}>
             <CategorySidePanel
               categoriesWorkingArray={categoriesWorkingArray}
@@ -51,20 +61,12 @@ export default function Articles({
               setSortOrder={setSortOrder}
             />
           </div>
-          <div className={styles.preview}>
-            <SelectedArticles
-              articles={articles}
-              searchTerm={searchTerm}
-              selectedCategories={selectedCategories}
-              sortBy={sortBy}
-              sortOrder={sortOrder}
-              media={media}
-            />
-          </div>
         </div>
       ) : (
         <Outlet />
       )}
     </>
   );
-}
+});
+
+export default Articles;

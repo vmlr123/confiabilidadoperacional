@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import voca from "voca";
 
 export default function CategorySelection({
   category,
@@ -42,12 +41,16 @@ export default function CategorySelection({
           onChange={handleChange}
         />
         <label htmlFor={category}>
-          {voca.titleCase(
-            category
-              .replace(/-/g, " ")
-              .replace(/category/g, "")
-              .replace(/tag/g, "")
-          )}
+          {category
+            .replace(/-/g, " ")
+            .replace(/category/g, "")
+            .replace(/tag/g, "")
+            .split(" ")
+            .map(
+              (word) =>
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            )
+            .join(" ")}
         </label>
         <br />
       </div>
