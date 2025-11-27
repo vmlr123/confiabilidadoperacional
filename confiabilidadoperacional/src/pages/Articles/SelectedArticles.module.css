@@ -1,3 +1,24 @@
+.selectedList a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.button {
+  margin: 1rem;
+  background-color: var(--accent-start);
+  padding: 1rem;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+
+.button:hover {
+  background-color: var(--accent-mid);
+  transition: color 0.3s ease;
+}
+
 .article {
   margin: 2rem;
   padding: 2rem;
@@ -38,7 +59,7 @@
 }
 
 .title a:hover {
-  color: #007bff;
+  color: var(--accent-mid);
 }
 
 .content {
@@ -77,29 +98,25 @@
 }
 
 .content a {
-  color: #007bff;
+  color: var(--link-color);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease;
 }
 
 .content a:hover {
-  border-bottom-color: #007bff;
+  color: var(--accent-mid);
 }
 
 .content button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  all: unset;
+  display: inline-block;
+  font: inherit;
+  color: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   margin: 0.5rem 0;
 }
 
 .content button:hover {
-  background-color: #0056b3;
+  text-decoration: underline;
 }
 
 h5 {

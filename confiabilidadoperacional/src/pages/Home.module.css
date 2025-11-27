@@ -46,11 +46,12 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #1b8415, #52a815);
+  background: var(--header-bg);
 }
 
 .section:hover {
-  transform: translateY(-5px);
+  /* No translation on hover to avoid layout shifts */
+  transform: none !important;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 

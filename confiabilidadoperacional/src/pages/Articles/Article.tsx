@@ -21,7 +21,16 @@ const Article = React.memo(function Article({
   description,
 }: Props) {
   const author: string = "Víctor Humberto Lameda Barreno";
-  const articleDate: string = new Date(date).toLocaleDateString();
+  let articleDate: string = "Fecha desconocida";
+  if (date) {
+    const parsed = new Date(date);
+    if (!isNaN(parsed.getTime())) {
+      articleDate = parsed.toLocaleDateString("es-ES");
+    } else {
+      // If `date` is already a localized string (passed from parent), use it as-is
+      articleDate = date;
+    }
+  }
   const slug: string = id ? "/articles/" + id : "#";
   const [picture, setPicture] = useState<string>("");
   const [alt, setAlt] = useState<string>("");
@@ -40,8 +49,30 @@ const Article = React.memo(function Article({
           "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/80zz1s24nag.jpg"
         );
         setAlt(typeof title === "string" ? title : "Article image");
+      } else if (id === 475) {
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/oxqn2cxc_9q-e1763471587377.jpg"
+        );
+        setAlt(typeof title === "string" ? title : "Article image");
+      } else if (id === 627) {
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/3044470-e1763507222881.jpeg"
+        );
+        setAlt(typeof title === "string" ? title : "Article image");
+      } else if (id === 582) {
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/3183197-e1763471482841.jpeg"
+        );
+        setAlt(typeof title === "string" ? title : "Article image");
+      } else if (id === 518) {
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/tffn3bylc5s-e1763471541414.jpg"
+        );
+        setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 327) {
-        setPicture("/src/assets/odvodywkxgk-e1761709472757.jpg.jpeg");
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/odvodywkxgk-e1763482105421.jpg"
+        );
         setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 326) {
         setPicture(
@@ -49,22 +80,39 @@ const Article = React.memo(function Article({
         );
         setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 325) {
-        setPicture("/src/assets/10396416.jpeg");
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/10396416.jpeg"
+        );
         setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 324) {
-        setPicture("/src/assets/257700.jpeg");
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/257700.jpeg"
+        );
         setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 323) {
-        setPicture("/src/assets/13247379-e1761698059778.jpeg");
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/10/13247379-e1761698059778.jpeg"
+        );
         setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 322) {
-        setPicture("/src/assets/lmb98ootoyu.jpg.jpeg");
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/lmb98ootoyu.jpg"
+        );
         setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 320) {
-        setPicture("/src/assets/3760790.jpeg");
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/3760790.jpeg"
+        );
         setAlt(typeof title === "string" ? title : "Article image");
       } else if (id === 319) {
-        setPicture("/src/assets/qiuwauflevg.jpg.jpeg");
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/qiuwauflevg.jpg"
+        );
+        setAlt(typeof title === "string" ? title : "Article image");
+      } else if (id === 670) {
+        setPicture(
+          "https://confiabilidadoperacional.com/wp-content/uploads/2025/11/tqq4bwn_ufs-e1763647777211.jpg"
+        );
         setAlt(typeof title === "string" ? title : "Article image");
       }
     }
@@ -72,30 +120,31 @@ const Article = React.memo(function Article({
 
   return (
     <>
+      {/*TODO: If no picture, center .article div contents horizontally and don't render .picture div */}
       <div key={id} className={styles.article}>
-        <div className={styles.picture}>
-          {picture && (
+        {picture && (
+          <div className={styles.picture}>
             <Link to={slug} className={styles.image}>
               <img src={picture} alt={alt} />
             </Link>
-          )}
-        </div>
+          </div>
+        )}
         <div className={styles.info}>
           {id ? (
-            <Link to={slug}>
-              <h1 className={styles.title}>{title}</h1>
+            <Link to={slug} className={`${styles.titlelink} container-fluid`}>
+              {title}
             </Link>
           ) : (
-            <h1 className={styles.title}>{title}</h1>
+            <h1 className={`${styles.titlelink} container`}>{title}</h1>
           )}
-          <p>{articleDate}</p>
+          <p className={styles.date}>{articleDate}</p>
           <p className={styles.author}>
             <em>Autor: {author}</em>
           </p>
-          <p>{description}</p>
+          <p className={styles.description}>{description}</p>
           {id ? (
             <Link to={slug} className={styles.button}>
-              <p>Sigue leyendo</p>
+              Sigue leyendo
             </Link>
           ) : null}
         </div>

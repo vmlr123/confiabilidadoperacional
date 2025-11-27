@@ -1,34 +1,4 @@
-:root {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --header-bg: linear-gradient(135deg, #1b8415, #52a815);
-  --menu-bg: #ffffff;
-  --link-color: #333333;
-  --link-hover: #52a815;
-  --button-bg: linear-gradient(135deg, #1b84158a, #52a8158a);
-  --button-hover: linear-gradient(135deg, #1b8415cb, #52a815cb);
-  --content-text: #555;
-  --content-bg: #ffffff;
-  --menu-link-bg-hover: #f0f0f0;
-  --menu-link-color-hover: #52a815;
-  --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-}
-
-.dark {
-  --bg-color: #1a1a1a;
-  --text-color: #ffffff;
-  --header-bg: linear-gradient(135deg, #1b8415, #52a815);
-  --menu-bg: #2a2a2a;
-  --link-color: #ffffff;
-  --link-hover: #52a815;
-  --button-bg: linear-gradient(135deg, #1b84158a, #52a8158a);
-  --button-hover: linear-gradient(135deg, #077201, #52a815);
-  --content-text: #e0e0e0;
-  --content-bg: #1a1a1a;
-  --menu-link-bg-hover: #404040;
-  --menu-link-color-hover: #52a815;
-}
+/* Theme variables are centralized in `src/styles/theme.css` */
 
 #root {
   width: 100%;
@@ -113,32 +83,25 @@
 }
 
 .page .content a {
-  color: #007bff;
+  color: var(--link-color);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease;
 }
 
 .page .content a:hover {
-  border-bottom-color: #007bff;
+  color: var(--accent-mid);
 }
 
 .page .content button {
-  background: var(--button-bg);
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 12px;
+  all: unset;
+  display: inline-block;
+  font: inherit;
+  color: inherit;
   cursor: pointer;
-  transition: var(--transition);
   margin: 0.5rem 0;
-  box-shadow: var(--shadow);
 }
 
 .page .content button:hover {
-  background: var(--button-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: underline;
 }
 
 @media (max-width: 767px) {

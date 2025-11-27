@@ -4,6 +4,7 @@ import DOMPurify from "dompurify";
 import { useState, useEffect, type ReactNode } from "react";
 import type { ArticleData } from "../../App";
 import type { MediaData } from "../../App";
+import styles from "./SelectedArticles.module.css";
 
 const ITEMS_PER_PAGE = 3;
 
@@ -28,6 +29,17 @@ export default function SelectedArticles({
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
+    const safeTime = (d?: string | Date) => {
+      if (!d) return 0;
+      if (d instanceof Date) {
+        const t = d.getTime();
+        return isNaN(t) ? 0 : t;
+      }
+      const parsed = new Date(d);
+      const t = parsed.getTime();
+      return isNaN(t) ? 0 : t;
+    };
+
     const filteredArticles = articles.filter((article) => {
       // Filter by search term
       const matchesSearch = article.title.rendered
@@ -35,7 +47,9 @@ export default function SelectedArticles({
         .includes(searchTerm.toLowerCase());
 
       // Filter by selected categories
-      const articleCategories = article.class_list.slice(7);
+      const articleCategories = Array.isArray(article.class_list)
+        ? article.class_list
+        : [];
       const selectedCategoriesArray = [...selectedCategories];
       const matchesCategory =
         selectedCategoriesArray.length === 0
@@ -50,11 +64,9 @@ export default function SelectedArticles({
     // Sort the filtered articles
     const sortedArticles = [...filteredArticles].sort((a, b) => {
       if (sortBy === "date") {
-        const dateA: Date = new Date(a.date);
-        const dateB: Date = new Date(b.date);
-        return sortOrder === "desc"
-          ? dateB.getTime() - dateA.getTime()
-          : dateA.getTime() - dateB.getTime();
+        const timeA = safeTime(a.date);
+        const timeB = safeTime(b.date);
+        return sortOrder === "desc" ? timeB - timeA : timeA - timeB;
       } else if (sortBy === "title") {
         return sortOrder === "desc"
           ? b.title.rendered.localeCompare(a.title.rendered)
@@ -73,6 +85,29 @@ export default function SelectedArticles({
   const paginatedArticles = finalArticles.slice(startIndex, endIndex);
   return (
     <>
+      {totalPages > 1 && (
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+          <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className={styles.button}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage(Math.min(totalPages, currentPage + 1))
+            }
+            disabled={currentPage === totalPages}
+            className={styles.button}
+          >
+            Next
+          </button>
+        </div>
+      )}
       {paginatedArticles.map((article) => (
         <Article
           key={article.id}
@@ -90,11 +125,13 @@ export default function SelectedArticles({
           }
           media={media}
           featuredMediaID={article.featured_media ?? 0}
-          description={parse(
+          description={
+            parse(
               DOMPurify.sanitize(
                 article.excerpt.rendered || "No se pudo cargar el contenido"
               )
-            ) as ReactNode}
+            ) as ReactNode
+          }
         />
       ))}
       {totalPages > 1 && (
@@ -102,15 +139,7 @@ export default function SelectedArticles({
           <button
             onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
             disabled={currentPage === 1}
-            style={{
-              margin: "0 0.5rem",
-              padding: "0.5rem 1rem",
-              background: "var(--button-bg)",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: currentPage === 1 ? "not-allowed" : "pointer",
-            }}
+            className={styles.button}
           >
             Previous
           </button>
@@ -122,15 +151,7 @@ export default function SelectedArticles({
               setCurrentPage(Math.min(totalPages, currentPage + 1))
             }
             disabled={currentPage === totalPages}
-            style={{
-              margin: "0 0.5rem",
-              padding: "0.5rem 1rem",
-              background: "var(--button-bg)",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: currentPage === totalPages ? "not-allowed" : "pointer",
-            }}
+            className={styles.button}
           >
             Next
           </button>

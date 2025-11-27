@@ -36,8 +36,7 @@
 }
 
 .submenu {
-  margin-left: 1rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -86,7 +85,7 @@
 
 .container a {
   text-decoration: none;
-  color: var(--link-color);
+  color: white;
   font-size: 1.2rem;
   font-weight: 500;
   padding: 0.75rem 1rem;
@@ -117,7 +116,8 @@
 .container a:hover {
   background-color: var(--menu-link-bg-hover);
   color: white;
-  transform: translateY(-2px);
+  /* No translation on hover to avoid layout shifts */
+  transform: none !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -148,5 +148,13 @@
 
 .closeButton:hover {
   background-color: var(--menu-link-bg-hover);
+  color: white;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
   color: white;
 }

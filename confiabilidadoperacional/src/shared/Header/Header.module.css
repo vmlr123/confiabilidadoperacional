@@ -41,7 +41,7 @@ nav {
 }
 
 .currenttime {
-  background-color: #1b8415;
+  background-color: var(--accent-mid);
   padding: 0 1rem;
   font-weight: bold;
   color: white;
@@ -66,10 +66,12 @@ nav {
 
 .trendingstatic {
   padding: 0 1rem;
+  margin: 1rem;
   background-color: black;
   border: solid 1px white;
   color: white;
   font-weight: bold;
+  align-self: center;
 }
 
 .trendingnews {
@@ -146,15 +148,13 @@ nav {
   }
 }
 
-/* Media query for tablets and smaller */
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
   .linksdesktop {
     display: none;
   }
 }
 
-/* Media query for laptops and bigger */
-@media (min-width: 1201px) {
+@media (min-width: 1501px) {
   .menubutton {
     display: none;
   }
@@ -186,7 +186,8 @@ a {
 a:hover {
   background: var(--button-hover);
   color: var(--text-color);
-  transform: translateY(-2px);
+  /* No translation on hover to avoid layout shifts */
+  transform: none !important;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 

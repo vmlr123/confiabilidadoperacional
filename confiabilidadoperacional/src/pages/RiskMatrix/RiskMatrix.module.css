@@ -1,0 +1,358 @@
+.matrix {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.25rem;
+  width: 100%;
+  margin: 0;
+  align-items: start;
+  --cell-size: 5.25rem;
+  --button-size: 36px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.riskOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.likelihoodText {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  margin: 0 0.75rem 0 0; /* space between vertical label and grid */
+  font-weight: 700;
+  color: var(--muted-color);
+  font-size: 0.9rem;
+}
+
+.impactText {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--muted-color);
+}
+
+.selectedCell {
+  border: 3px solid rgba(0, 0, 0, 0.6);
+}
+
+.green {
+  background: linear-gradient(180deg, var(--accent-start), var(--accent-mid));
+}
+.orange {
+  background: linear-gradient(180deg, #f59e0b, #f97316);
+}
+.red {
+  background: linear-gradient(180deg, #ef4444, #dc2626);
+}
+
+th {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  margin: 0;
+  border-radius: 6px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 4px;
+  box-sizing: border-box;
+  box-shadow: inset 0 -6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.riskCard {
+  background: var(--content-bg);
+  border: 1px solid var(--card-border);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px var(--accent-shadow);
+}
+
+.matrixHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.legend {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.legendItem {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--muted-color);
+}
+.legendSwatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06) inset;
+}
+
+.cellButton {
+  width: var(--button-size);
+  height: var(--button-size);
+  padding: 0;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  font-weight: 700;
+  border: 0.25rem solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 2px 6px rgba(2, 6, 23, 0.06);
+}
+
+/* Respect reduced-motion preference: avoid transforms */
+@media (prefers-reduced-motion: reduce) {
+  .cellButton,
+  th {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+.controls {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.actionBar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.riskSelectors {
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.riskSelectors p {
+  margin: 0.1rem 0 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.cellButton[tabindex="0"] {
+  outline: none;
+}
+
+select {
+  padding: 0.375rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--text-color);
+}
+
+/* Ensure native select options are readable in dark mode (white background on native options often conflicts with white text) */
+select option {
+  color: var(--select-option-color) !important;
+  background: #ffffff !important;
+}
+
+.matrixInner {
+  display: flex;
+  align-items: center;
+}
+
+.grid {
+  border-collapse: separate;
+  border-spacing: 8px;
+  margin: 0.5rem 0;
+  table-layout: fixed;
+  width: calc(5 * var(--cell-size) + 4 * 8px);
+  height: calc(5 * var(--cell-size) + 4 * 8px);
+  min-width: calc(5 * var(--cell-size) + 4 * 8px);
+  min-height: calc(5 * var(--cell-size) + 4 * 8px);
+}
+
+.title {
+  font-size: 1.6rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+}
+
+.cellButton {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 0 !important;
+}
+
+.riskOne,
+.riskTwo,
+.riskThree,
+.riskFour {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* responsive */
+@media (max-width: 1024px) {
+  .matrix {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+
+/* Tablet (landscape and portrait between phone and desktop) */
+@media (max-width: 900px) {
+  th {
+    width: var(--cell-size);
+    height: var(--cell-size);
+  }
+  .legendItem {
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile small (stack only on very small phones, keep left label on larger phones like iPhone XR) */
+@media (max-width: 480px) {
+  .matrix {
+    --cell-size: 3rem;
+  }
+  .riskCard {
+    padding: 0.75rem;
+  }
+  .matrixInner {
+    width: 100%;
+    overflow-x: auto; /* allow horizontal scroll instead of compressing cells */
+    -webkit-overflow-scrolling: touch;
+    flex-direction: row;
+  }
+  .grid {
+    border-spacing: 6px;
+    width: calc(5 * var(--cell-size) + 4 * 6px);
+    height: calc(5 * var(--cell-size) + 4 * 6px);
+    min-width: calc(5 * var(--cell-size) + 4 * 6px);
+    min-height: calc(5 * var(--cell-size) + 4 * 6px);
+  }
+  /* smaller cells to fit narrow view but keep touch targets useful */
+  .legend {
+    flex-wrap: wrap;
+  }
+  .legendSwatch {
+    width: 12px;
+    height: 12px;
+  }
+  .controls {
+    grid-template-columns: 1fr; /* ensure controls full width under matrix */
+  }
+  .actionBar {
+    justify-content: space-between;
+  }
+  select {
+    width: 100%;
+  }
+  .riskOne,
+  .riskTwo,
+  .riskThree,
+  .riskFour {
+    grid-template-columns: 1fr; /* stack controls vertically */
+  }
+  .title {
+    font-size: 1.2rem;
+  }
+}
+
+/* Extra small phones: stack legend items and reduce paddings */
+@media (max-width: 360px) {
+  .legendItem {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .matrix {
+    display: flex;
+    flex-direction: row;
+  }
+  .actionBar {
+    margin-top: 2rem;
+  }
+}
+.summary {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+}
+.summary h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted-color);
+}
+.summary ul {
+  list-style: none;
+  padding: 0;
+}
+.summary li {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  padding: 0.15rem 0;
+}
+
+/* Avoid moving the table cell itself; apply visual lift to the button only */
+th,
+th:focus-within {
+  overflow: visible; /* allow inner button transforms without clipping */
+}
+
+.cellButton:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Use a transform on the inner button only (no layout shift). */
+.cellButton:hover,
+.cellButton:focus {
+  /* No translate to avoid any layout movement — only strengthen the shadow */
+  transform: none !important;
+  box-shadow: 0 8px 22px rgba(2, 6, 23, 0.12);
+}
+
+.cellButton {
+  will-change: box-shadow;
+}
+
+.resetButton {
+  padding: 1rem;
+  background-color: rgba(189, 189, 189, 0.13);
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}
+
+.srOnly {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+h2 {
+  margin: 0 2rem;
+}
+
+h3,
+h4 {
+  margin: 2rem 0;
+}

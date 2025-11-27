@@ -7,6 +7,7 @@ import Footer from "./shared/Footer/Footer";
 import Loading from "./shared/Loading/Loading";
 import Menu from "./pages/Menu/Menu";
 import ErrorBoundary from "./components/ErrorBoundary";
+import RiskMatrix from "./pages/RiskMatrix/RiskMatrix";
 
 const Articles = lazy(() => import("./pages/Articles/Articles"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -55,10 +56,17 @@ const App = React.memo(function App() {
   };
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme;
+    const savedTheme = localStorage.getItem("theme") as Theme | null;
     if (savedTheme) {
       setTheme(savedTheme);
       document.body.classList.toggle("dark", savedTheme === "dark");
+    } else if (window && window.matchMedia) {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const initial = prefersDark ? "dark" : "light";
+      setTheme(initial);
+      document.body.classList.toggle("dark", initial === "dark");
     }
   }, []);
 
@@ -188,6 +196,7 @@ const App = React.memo(function App() {
                         ))}
                     </Route>
                     <Route path="*" element={<NotFound />} />
+                    <Route path="/risk-matrix" element={<RiskMatrix />} />
                   </Routes>
                 </Suspense>
               </Menu>

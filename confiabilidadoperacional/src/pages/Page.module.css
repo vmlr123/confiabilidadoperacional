@@ -1,7 +1,8 @@
 .page {
-  text-align: left;
-  max-width: 800px;
-  overflow: auto;
+  text-align: center;
+  max-width: 60%;
+  margin: 3rem auto;
+  line-height: 1.5;
 }
 
 .content table {
@@ -35,6 +36,8 @@
 
 .content p {
   margin-bottom: 1rem;
+  text-indent: 0rem;
+  margin-left: 0;
 }
 
 .content h1,
@@ -42,6 +45,7 @@
 .content h3 {
   color: --text-color;
   margin-bottom: 1rem;
+  text-indent: 0;
 }
 
 @media (max-width: 767px) {

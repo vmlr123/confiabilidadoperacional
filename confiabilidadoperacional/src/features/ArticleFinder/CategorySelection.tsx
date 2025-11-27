@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from "./CategorySelection.module.css";
 
 export default function CategorySelection({
   category,
@@ -29,9 +30,20 @@ export default function CategorySelection({
     }
   };
 
+  const pretty = category
+    .replace(/-/g, " ")
+    .replace(/category/g, "")
+    .replace(/tag/g, "")
+    .split(" ")
+    .map((word) =>
+      word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : ""
+    )
+    .join(" ")
+    .trim();
+
   return (
-    <>
-      <div>
+    <div className={styles.item}>
+      <span className={styles.checkbox} aria-hidden>
         <input
           type="checkbox"
           id={category}
@@ -39,21 +51,15 @@ export default function CategorySelection({
           value={category}
           checked={isChecked}
           onChange={handleChange}
+          aria-checked={isChecked}
         />
-        <label htmlFor={category}>
-          {category
-            .replace(/-/g, " ")
-            .replace(/category/g, "")
-            .replace(/tag/g, "")
-            .split(" ")
-            .map(
-              (word) =>
-                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-            )
-            .join(" ")}
-        </label>
-        <br />
-      </div>
-    </>
+      </span>
+      <label
+        htmlFor={category}
+        className={`${styles.labelText} ${isChecked ? styles.selected : ""}`}
+      >
+        {pretty}
+      </label>
+    </div>
   );
 }

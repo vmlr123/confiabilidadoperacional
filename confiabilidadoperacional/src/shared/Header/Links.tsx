@@ -58,10 +58,13 @@ export default function Links({
       }
     });
 
-    // Exclude home page to avoid duplication
-    return rootPages.filter(
-      (page) => !page.title.rendered.toLowerCase().includes("home")
-    );
+    // Exclude pages that should not appear in the mobile nav (home, blog)
+    return rootPages.filter((page) => {
+      const t = page.title.rendered.toLowerCase();
+      if (t.includes("home")) return false;
+      if (t.includes("blog")) return false;
+      return true;
+    });
   }, [pages]);
 
   // Flatten the hierarchy for pagination - only top-level items
@@ -70,6 +73,7 @@ export default function Links({
     // Always include home and articles first
     items.push("home");
     items.push("articles");
+    items.push("risk-matrix");
     pageHierarchy.forEach((page) => {
       items.push(page);
     });
@@ -80,15 +84,6 @@ export default function Links({
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE_MENU;
   const endIndex = startIndex + ITEMS_PER_PAGE_MENU;
   const paginatedItems = allMenuItems.slice(startIndex, endIndex);
-
-  // Ensure home and articles are always on the first page
-  const adjustedPaginatedItems =
-    currentPage === 1
-      ? paginatedItems
-      : paginatedItems.filter(
-          (item) =>
-            typeof item !== "string" || (item !== "home" && item !== "articles")
-        );
 
   const renderMenuItem = (item: PageNode | string) => {
     if (typeof item === "string") {
@@ -116,6 +111,19 @@ export default function Links({
             onClick={() => setIsClicked(false)}
           >
             Inicio
+          </NavLink>
+        );
+      } else if (item === "risk-matrix") {
+        return (
+          <NavLink
+            key="risk-matrix"
+            to="/risk-matrix"
+            className={({ isActive }) =>
+              isActive ? styles.active : styles.inactive
+            }
+            onClick={() => setIsClicked(false)}
+          >
+            Matriz de Riesgo
           </NavLink>
         );
       }
@@ -161,9 +169,9 @@ export default function Links({
         >
           ✕
         </button>
-        {adjustedPaginatedItems.map((item) => renderMenuItem(item))}
+        {paginatedItems.map((item) => renderMenuItem(item))}
         {totalPages > 1 && (
-          <div style={{ textAlign: "center", marginTop: "1rem" }}>
+          <div className={styles.pagination}>
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}

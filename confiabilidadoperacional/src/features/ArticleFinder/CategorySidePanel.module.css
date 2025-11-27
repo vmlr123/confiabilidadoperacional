@@ -1,17 +1,84 @@
-.categories legend {
-  font-size: large;
-}
-
-.categories {
+.panel {
   margin: 1rem;
+  padding: 1.25rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(18, 38, 63, 0.479);
+  transition: box-shadow 0.2s ease;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial;
 }
 
-@media (max-width: 767px) {
-  .categories legend {
-    font-size: medium;
-  }
+.panel:hover {
+  box-shadow: 0 10px 30px rgba(18, 38, 63, 0.308);
+  /* No translation on hover — use shadow to indicate elevation */
+  transform: none !important;
+}
 
-  .categories {
+.legend {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #102a43;
+  margin-bottom: 0.75rem;
+}
+
+.controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-direction: column;
+}
+
+.search {
+  flex: 1 1 auto;
+}
+
+.search input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #102a43;
+}
+
+.select {
+  flex: 0 0 160px;
+}
+
+.select select {
+  width: 100%;
+  padding: 0.48rem 0.6rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fff;
+  color: #102a43;
+}
+
+.toggleButton {
+  padding: 0.45rem 0.6rem;
+  background: linear-gradient(180deg, #0f172a, #0b1220);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.categoriesList {
+  max-height: 42vh;
+  overflow: auto;
+  padding: 0.25rem 0;
+  margin: 0;
+}
+
+/* small screens */
+@media (max-width: 767px) {
+  .panel {
     margin: 0.5rem;
+    padding: 0.9rem;
+  }
+  .select {
+    display: none;
   }
 }

@@ -12,9 +12,11 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "dompurify": "^3.3.0",
     "html-react-parser": "^5.2.7",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.5.0",
     "react-helmet-async": "^2.0.5",

@@ -1,0 +1,62 @@
+:root {
+  /* Accent / brand */
+  --accent-start: #10b981;
+  --accent-mid: #059669;
+  --accent-end: #047857;
+  --accent-gradient: linear-gradient(
+    90deg,
+    var(--accent-start) 0%,
+    var(--accent-mid) 50%,
+    var(--accent-end) 100%
+  );
+  --button-bg: linear-gradient(135deg, var(--accent-start), var(--accent-mid));
+  --button-bg-hover: linear-gradient(135deg, #059669, #047857);
+  --accent-shadow: rgba(4, 120, 87, 0.12);
+  --header-bg: linear-gradient(135deg, var(--accent-start), var(--accent-mid));
+
+  /* Link colors tuned for dark background for higher contrast */
+  --link-color: #7ee6b8; /* light mint for dark backgrounds */
+  --link-hover: #bff6df;
+
+  /* Layout colors (dark theme defaults) */
+  --bg-color: #242424;
+  --text-color: rgba(255, 255, 255, 0.92);
+  --muted-color: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(230, 244, 236, 0.04);
+  --select-option-color: #000000;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #ffffff;
+    --text-color: #0f172a;
+    --muted-color: #475569;
+    --link-color: #0b5a3a; /* darker green for light backgrounds */
+    --link-hover: #05502d;
+    --card-border: rgba(2, 6, 23, 0.04);
+    --accent-shadow: rgba(4, 120, 87, 0.06);
+  }
+}
+
+/* Explicit dark/light overrides when JS toggles classes on <body> */
+body.dark {
+  --bg-color: #242424;
+  --text-color: rgba(255, 255, 255, 0.92);
+  --muted-color: rgba(255, 255, 255, 0.72);
+  --link-color: #7ee6b8;
+  --link-hover: #bff6df;
+  --card-border: rgba(230, 244, 236, 0.04);
+  --select-option-color: #000000;
+  --header-bg: linear-gradient(135deg, var(--accent-start), var(--accent-mid));
+}
+
+body.light {
+  --bg-color: #ffffff;
+  --text-color: #0f172a;
+  --muted-color: #475569;
+  --link-color: #0b5a3a;
+  --link-hover: #05502d;
+  --card-border: rgba(2, 6, 23, 0.04);
+  --select-option-color: #000000;
+  --header-bg: linear-gradient(135deg, var(--accent-start), var(--accent-mid));
+}

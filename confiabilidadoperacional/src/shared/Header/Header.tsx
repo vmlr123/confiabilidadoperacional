@@ -79,8 +79,19 @@ export default function Header({
   useEffect(() => {
     if (articles.length === 0) return;
 
+    const safeTime = (d?: string | Date) => {
+      if (!d) return 0;
+      if (d instanceof Date) {
+        const t = d.getTime();
+        return isNaN(t) ? 0 : t;
+      }
+      const parsed = new Date(d);
+      const t = parsed.getTime();
+      return isNaN(t) ? 0 : t;
+    };
+
     const sortedArticles: ArticleData[] = [...articles].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      (a, b) => safeTime(b.date) - safeTime(a.date)
     );
     const titles: string[] = sortedArticles.map((article) =>
       typeof article.title.rendered === "string"
