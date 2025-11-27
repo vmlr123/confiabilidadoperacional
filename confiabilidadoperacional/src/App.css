@@ -1,8 +1,14 @@
+/* Theme variables are centralized in `src/styles/theme.css` */
+
 #root {
   width: 100%;
+  overflow-x: hidden;
   text-align: center;
   font-family: "Arial", sans-serif;
   line-height: 1.6;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
@@ -14,7 +20,6 @@
 
 .main-content {
   flex-grow: 1;
-  margin-top: 80px; /* Adjust based on header height */
   padding: 1rem;
   margin-left: auto;
   margin-right: auto;
@@ -43,7 +48,8 @@
 .page .content {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #555;
+  color: var(--content-text);
+  background-color: var(--content-bg);
 }
 
 .page .content img {
@@ -61,7 +67,7 @@
 .page .content h1,
 .page .content h2,
 .page .content h3 {
-  color: #333;
+  color: var(--text-color);
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -77,29 +83,25 @@
 }
 
 .page .content a {
-  color: #007bff;
+  color: var(--link-color);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease;
 }
 
 .page .content a:hover {
-  border-bottom-color: #007bff;
+  color: var(--accent-mid);
 }
 
 .page .content button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  all: unset;
+  display: inline-block;
+  font: inherit;
+  color: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   margin: 0.5rem 0;
 }
 
 .page .content button:hover {
-  background-color: #0056b3;
+  text-decoration: underline;
 }
 
 @media (max-width: 767px) {

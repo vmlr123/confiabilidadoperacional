@@ -11,8 +11,18 @@ export default function Page({
   content: string;
 }) {
   const isHome = title.toLowerCase() === "home";
+  const listOfPagesWithTables: string[] = [
+    "Técnicas de Apreciación del Riesgo",
+  ];
   return (
     <div className={styles.page}>
+      {listOfPagesWithTables.includes(title) && (
+        <h4>
+          Ésta página contiene una tabla. Si está utilizando un dispositivo con
+          una pantalla pequeña (como un teléfono), por favor ponga el
+          dispositivo en modo horizontal.
+        </h4>
+      )}
       <h2 className={styles.title}>
         {
           parse(

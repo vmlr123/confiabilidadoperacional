@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -14,28 +14,29 @@
 }
 
 .menu {
-  background-color: #ffffff;
+  background-color: var(--menu-bg);
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   padding: 2rem;
   max-width: 400px;
   width: 100%;
-  max-height: 80vh;
+  height: calc(100vh - 2rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   box-sizing: border-box;
+  position: relative;
 }
-
 .menuItem {
   display: flex;
   flex-direction: column;
 }
 
 .submenu {
-  margin-left: 1rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -84,7 +85,7 @@
 
 .container a {
   text-decoration: none;
-  color: #333333;
+  color: white;
   font-size: 1.2rem;
   font-weight: 500;
   padding: 0.75rem 1rem;
@@ -113,9 +114,10 @@
 }
 
 .container a:hover {
-  background-color: #f0f0f0;
-  color: #007bff;
-  transform: translateY(-2px);
+  background-color: var(--menu-link-bg-hover);
+  color: white;
+  /* No translation on hover to avoid layout shifts */
+  transform: none !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -127,4 +129,32 @@
 .active:hover {
   background-color: #0056b3;
   color: #ffffff;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  z-index: 1001;
+}
+
+.closeButton:hover {
+  background-color: var(--menu-link-bg-hover);
+  color: white;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  color: white;
 }

@@ -1,43 +1,54 @@
-figure {
+.date {
+  color: var(--muted-color);
+}
+
+a,
+a:hover,
+a:focus {
+  color: var(--link-color);
+  text-decoration: none;
+  background: none;
+  box-shadow: none;
+}
+
+figure img,
+.pic {
   width: 100%;
-  margin: 0 auto;
 }
 
 table {
-  border-collapse: collapse; /* Merges adjacent cell borders */
+  border-collapse: collapse;
   width: auto;
   max-width: 100%;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Ensures border-radius is visible */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
   margin: 0 auto;
 }
 
 th,
 td {
-  border: 1px solid #ddd; /* Light gray border */
-  padding: 8px; /* Spacing inside cells */
-  text-align: left; /* Align text to the left */
+  border: 1px solid var(--card-border);
+  padding: 8px;
+  text-align: left;
 }
 
 th {
-  background-color: #f2f2f2; /* Light gray background for headers */
-  color: black; /* Black text for headers */
+  background-color: var(--content-bg);
+  color: var(--text-color);
   font-weight: bold;
 }
 
-tr:hover {
-  background-color: #e6e6e6; /* Slightly darker gray on hover */
-}
-
 .article {
-  margin: 1rem;
+  margin: 1rem auto;
   padding: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--card-border);
   border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--content-bg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
   transition: box-shadow 0.3s ease;
+  max-width: 800px;
+  box-sizing: border-box;
 }
 
 .article:hover {
@@ -47,7 +58,7 @@ tr:hover {
 .author {
   margin: 0.5rem 0;
   padding: 0.5rem 0;
-  color: #666;
+  color: var(--muted-color);
   font-style: italic;
 }
 
@@ -55,7 +66,7 @@ tr:hover {
   font-size: 1.5rem;
   margin: 0.5rem 0;
   padding: 0.5rem 0;
-  color: #333;
+  color: var(--text-color);
 }
 
 .title a {
@@ -67,15 +78,15 @@ tr:hover {
 }
 
 .title a:hover {
-  color: #007bff;
+  color: var(--accent-mid);
 }
 
 .content {
   margin: 1rem auto;
-  color: #555;
-  width: 70%;
+  color: var(--muted-color);
+  width: 100%;
+  max-width: 100%;
   line-height: 1.5;
-  justify-content: center;
   text-align: center;
 }
 
@@ -87,20 +98,15 @@ tr:hover {
 
 .content div {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  margin: 4rem;
+  margin: 2rem;
   font-size: x-large;
   font-weight: bold;
+  max-width: 100%;
 }
 
 .content div div {
   border: none;
   box-shadow: none;
-  margin: 0;
-}
-.content img {
-  width: 25%;
-  height: auto;
-  border-radius: 8px;
   margin: 0;
 }
 
@@ -111,7 +117,7 @@ tr:hover {
 .content h1,
 .content h2,
 .content h3 {
-  color: #333;
+  color: var(--text-color);
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -127,21 +133,18 @@ tr:hover {
 }
 
 .content a {
-  color: #007bff;
+  color: var(--link-color);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease;
   background-color: rgba(255, 255, 255, 0);
   margin: 0;
 }
 
 .content button {
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  all: unset;
+  display: inline-block;
+  font: inherit;
+  color: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   margin: 0;
 }
 
@@ -163,7 +166,58 @@ tr:hover {
   }
 
   .content {
-    margin: 0.5rem 0;
+    margin: 0.5rem auto;
+    width: 90%;
+  }
+
+  .content div {
+    margin: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .article {
+    margin: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .author {
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+  }
+
+  .content {
+    margin: 1.5rem auto;
+    width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .article {
+    margin: 2rem;
+    padding: 2rem;
+  }
+
+  .author {
+    margin: 1rem 0;
+    padding: 1rem 0;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin: 1rem 0;
+    padding: 1rem 0;
+  }
+
+  .content {
+    margin: 2rem auto;
+    width: 70%;
   }
 }
 

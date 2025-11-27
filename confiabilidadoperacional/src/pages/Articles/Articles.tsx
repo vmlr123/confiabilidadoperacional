@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CategorySidePanel from "../../features/ArticleFinder/CategorySidePanel";
 import styles from "./Articles.module.css";
 import type { ArticleData } from "../../App";
@@ -6,7 +6,7 @@ import type { MediaData } from "../../App";
 import SelectedArticles from "./SelectedArticles";
 import { Outlet, useLocation } from "react-router-dom";
 
-export default function Articles({
+const Articles = React.memo(function Articles({
   articles,
   media,
 }: {
@@ -27,17 +27,70 @@ export default function Articles({
   useEffect(() => {
     const catSet = new Set<string>();
     articles.forEach((article) => {
-      for (const category of article.class_list.slice(7)) {
-        catSet.add(category);
+      const classes = Array.isArray(article.class_list)
+        ? article.class_list
+        : [];
+      for (const category of classes) {
+        if (!category) continue;
+        const key = category.toLowerCase();
+        // Skip tags - they should not appear as categories
+        if (key.includes("tag")) continue;
+        // Only include entries that look like categories
+        if (key.includes("category") || key.startsWith("cat-")) {
+          catSet.add(category);
+        }
       }
     });
     setCategoriesWorkingArray([...catSet]);
   }, [articles]);
 
+  // Try to fetch authoritative list of registered categories from WP REST API.
+  // If fetch fails, fall back to the categories discovered in `class_list` above.
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchCategories() {
+      try {
+        const res = await fetch(
+          "https://confiabilidadoperacional.com/wp-json/wp/v2/categories?per_page=100"
+        );
+        if (!res.ok) throw new Error("Failed to fetch categories");
+        const data = await res.json();
+        if (cancelled) return;
+        if (Array.isArray(data) && data.length > 0) {
+          // Map to the same `class_list` style values (e.g. `category-slug`)
+          const mapped = data
+            .filter((c) => c && c.slug)
+            .map((c) => `category-${c.slug}`);
+          setCategoriesWorkingArray(mapped);
+        }
+      } catch {
+        // Keep fallback derived from articles (already set by previous effect)
+      }
+    }
+
+    fetchCategories();
+    return () => {
+      cancelled = true;
+    };
+  }, [articles]);
+
+  // Debug dump removed
+
   return (
     <>
       {currentLocation === "/articles" ? (
         <div className={styles.articles}>
+          <div className={styles.preview}>
+            <SelectedArticles
+              articles={articles}
+              searchTerm={searchTerm}
+              selectedCategories={selectedCategories}
+              sortBy={sortBy}
+              sortOrder={sortOrder}
+              media={media}
+            />
+          </div>
           <div className={styles.categories}>
             <CategorySidePanel
               categoriesWorkingArray={categoriesWorkingArray}
@@ -51,20 +104,12 @@ export default function Articles({
               setSortOrder={setSortOrder}
             />
           </div>
-          <div className={styles.preview}>
-            <SelectedArticles
-              articles={articles}
-              searchTerm={searchTerm}
-              selectedCategories={selectedCategories}
-              sortBy={sortBy}
-              sortOrder={sortOrder}
-              media={media}
-            />
-          </div>
         </div>
       ) : (
         <Outlet />
       )}
     </>
   );
-}
+});
+
+export default Articles;

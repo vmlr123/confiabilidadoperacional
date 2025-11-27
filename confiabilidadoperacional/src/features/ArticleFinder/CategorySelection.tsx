@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from "./CategorySelection.module.css";
 
 export default function CategorySelection({
   category,
@@ -8,7 +9,7 @@ export default function CategorySelection({
   category: string;
   selectedCategories: Set<string>;
   setSelectedCategories: (value: Set<string>) => void;
-}) {
+}): React.JSX.Element {
   const [isChecked, setIsChecked] = useState<boolean>(
     selectedCategories.has(category)
   );
@@ -18,20 +19,31 @@ export default function CategorySelection({
   }, [selectedCategories, category]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
+    const checked: boolean = e.target.checked;
     setIsChecked(checked);
     if (checked) {
       setSelectedCategories(new Set([...selectedCategories, category]));
     } else {
-      const newSet = new Set(selectedCategories);
+      const newSet: Set<string> = new Set(selectedCategories);
       newSet.delete(category);
       setSelectedCategories(newSet);
     }
   };
 
+  const pretty = category
+    .replace(/-/g, " ")
+    .replace(/category/g, "")
+    .replace(/tag/g, "")
+    .split(" ")
+    .map((word) =>
+      word ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() : ""
+    )
+    .join(" ")
+    .trim();
+
   return (
-    <>
-      <div>
+    <div className={styles.item}>
+      <span className={styles.checkbox} aria-hidden>
         <input
           type="checkbox"
           id={category}
@@ -39,10 +51,15 @@ export default function CategorySelection({
           value={category}
           checked={isChecked}
           onChange={handleChange}
+          aria-checked={isChecked}
         />
-        <label htmlFor={category}>{category}</label>
-        <br />
-      </div>
-    </>
+      </span>
+      <label
+        htmlFor={category}
+        className={`${styles.labelText} ${isChecked ? styles.selected : ""}`}
+      >
+        {pretty}
+      </label>
+    </div>
   );
 }

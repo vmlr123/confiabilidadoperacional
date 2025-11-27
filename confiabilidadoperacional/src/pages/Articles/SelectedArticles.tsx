@@ -4,6 +4,9 @@ import DOMPurify from "dompurify";
 import { useState, useEffect, type ReactNode } from "react";
 import type { ArticleData } from "../../App";
 import type { MediaData } from "../../App";
+import styles from "./SelectedArticles.module.css";
+
+const ITEMS_PER_PAGE = 3;
 
 export default function SelectedArticles({
   articles,
@@ -23,8 +26,20 @@ export default function SelectedArticles({
   const [finalArticles, setFinalArticles] = useState<ArticleData[]>([
     ...articles,
   ]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
+    const safeTime = (d?: string | Date) => {
+      if (!d) return 0;
+      if (d instanceof Date) {
+        const t = d.getTime();
+        return isNaN(t) ? 0 : t;
+      }
+      const parsed = new Date(d);
+      const t = parsed.getTime();
+      return isNaN(t) ? 0 : t;
+    };
+
     const filteredArticles = articles.filter((article) => {
       // Filter by search term
       const matchesSearch = article.title.rendered
@@ -32,7 +47,9 @@ export default function SelectedArticles({
         .includes(searchTerm.toLowerCase());
 
       // Filter by selected categories
-      const articleCategories = article.class_list.slice(7);
+      const articleCategories = Array.isArray(article.class_list)
+        ? article.class_list
+        : [];
       const selectedCategoriesArray = [...selectedCategories];
       const matchesCategory =
         selectedCategoriesArray.length === 0
@@ -47,11 +64,9 @@ export default function SelectedArticles({
     // Sort the filtered articles
     const sortedArticles = [...filteredArticles].sort((a, b) => {
       if (sortBy === "date") {
-        const dateA: Date = new Date(a.date);
-        const dateB: Date = new Date(b.date);
-        return sortOrder === "desc"
-          ? dateB.getTime() - dateA.getTime()
-          : dateA.getTime() - dateB.getTime();
+        const timeA = safeTime(a.date);
+        const timeB = safeTime(b.date);
+        return sortOrder === "desc" ? timeB - timeA : timeA - timeB;
       } else if (sortBy === "title") {
         return sortOrder === "desc"
           ? b.title.rendered.localeCompare(a.title.rendered)
@@ -61,10 +76,39 @@ export default function SelectedArticles({
     });
 
     setFinalArticles(sortedArticles);
+    setCurrentPage(1); // Reset to first page when filters change
   }, [articles, searchTerm, selectedCategories, sortBy, sortOrder]);
+
+  const totalPages = Math.ceil(finalArticles.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedArticles = finalArticles.slice(startIndex, endIndex);
   return (
     <>
-      {finalArticles.map((article) => (
+      {totalPages > 1 && (
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+          <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className={styles.button}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage(Math.min(totalPages, currentPage + 1))
+            }
+            disabled={currentPage === totalPages}
+            className={styles.button}
+          >
+            Next
+          </button>
+        </div>
+      )}
+      {paginatedArticles.map((article) => (
         <Article
           key={article.id}
           id={article.id}
@@ -76,13 +120,43 @@ export default function SelectedArticles({
             ) as ReactNode
           }
           date={
-            new Date(article.date).toLocaleDateString() ||
+            new Date(article.date).toLocaleDateString("es-ES") ||
             "No se pudo cargar el contenido. Por favor intente recargar la página."
           }
           media={media}
           featuredMediaID={article.featured_media ?? 0}
+          description={
+            parse(
+              DOMPurify.sanitize(
+                article.excerpt.rendered || "No se pudo cargar el contenido"
+              )
+            ) as ReactNode
+          }
         />
       ))}
+      {totalPages > 1 && (
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+          <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className={styles.button}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage(Math.min(totalPages, currentPage + 1))
+            }
+            disabled={currentPage === totalPages}
+            className={styles.button}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </>
   );
 }

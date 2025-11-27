@@ -1,5 +1,4 @@
-.header {
-  position: fixed;
+nav {
   top: 0;
   left: 0;
   width: 100%;
@@ -7,17 +6,161 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 126, 0.678);
+  background: var(--header-bg);
   z-index: 100;
   box-sizing: border-box;
   padding: 0.5rem;
+  gap: 1rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.trendingnews {
+  color: white;
+  margin: 1rem;
+}
+
+.news {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.currentinfo {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: space-between;
+  background-color: rgb(15, 15, 15);
+}
+
+.currentdate,
+.currenttime,
+.currenttemp {
+  margin: 1rem;
+}
+
+.currenttime {
+  background-color: var(--accent-mid);
+  padding: 0 1rem;
+  font-weight: bold;
+  color: white;
+  font-weight: bold;
+}
+
+.phrase {
+  color: white;
+}
+
+.today {
+  margin: 0 2rem;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.news {
+  margin: 0 1rem;
+}
+
+.trendingstatic {
+  padding: 0 1rem;
+  margin: 1rem;
+  background-color: black;
+  border: solid 1px white;
+  color: white;
+  font-weight: bold;
+  align-self: center;
+}
+
+.trendingnews {
+  font-family: monospace;
+  border-right: 2px solid white;
+  animation: blink-caret 1s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.bannerimg {
+  height: 8rem;
+  width: 8rem;
+  position: relative;
+  opacity: 1 !important;
+}
+
+.draggableimglink,
+.draggableimglink a,
+.draggableimglink a:hover,
+.draggableimglink:hover {
+  background: rgba(255, 255, 255, 0);
+  box-shadow: none;
+}
+
+.infront {
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.671);
+  padding: 2rem;
+  position: relative;
+}
+
+.banner {
+  background-image: url("https://confiabilidadoperacional.com/wp-content/uploads/2025/10/icolttjygaa-1.jpg");
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+}
+
+.page {
+  max-width: 100%;
+  height: auto;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  z-index: 100;
 }
 
 @media (max-width: 767px) {
-  .header {
+  nav {
     position: static;
     background-color: rgba(0, 0, 126, 0.9);
     padding: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 1500px) {
+  .linksdesktop {
+    display: none;
+  }
+}
+
+@media (min-width: 1501px) {
+  .menubutton {
+    display: none;
+  }
+
+  .page {
+    display: none;
   }
 }
 
@@ -26,32 +169,68 @@
   padding: 2rem;
 }
 
-.page {
-  font-size: 2rem;
-  margin: 1rem;
-  color: black;
-}
-
 a {
-  color: black;
+  color: var(--text-color);
   padding: 1rem 2rem;
-  background-color: rgba(117, 190, 255, 0.5);
+  background: var(--button-bg);
   border-radius: 5rem;
   -webkit-border-radius: 5rem;
   -moz-border-radius: 5rem;
   -ms-border-radius: 5rem;
   -o-border-radius: 5rem;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 
 a:hover {
-  background-color: rgba(117, 190, 255, 0.7);
+  background: var(--button-hover);
+  color: var(--text-color);
+  /* No translation on hover to avoid layout shifts */
+  transform: none !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 767px) {
   a {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+  }
+  .news {
+    display: none;
+  }
+  .today {
+    left: 0;
+    right: auto;
+  }
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+img,
+a {
+  -webkit-user-drag: none; /* For Chrome, Safari, and Edge */
+  -moz-user-drag: none; /* For Firefox */
+  -ms-user-drag: none; /* For Internet Explorer/Edge */
+  user-drag: none; /* Standard property */
+}
+
+.themeToggle:hover {
+  background-color: rgba(117, 190, 255, 0.3);
+  transform: scale(1.1);
+}
+
+@media (max-width: 767px) {
+  .themeToggle {
+    font-size: 1.2rem;
+    padding: 0.3rem;
   }
 }
