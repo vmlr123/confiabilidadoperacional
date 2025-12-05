@@ -124,7 +124,7 @@ export default function SelectedArticles({
             "No se pudo cargar el contenido. Por favor intente recargar la página."
           }
           media={media}
-          featuredMediaID={article.featured_media ?? 0}
+          featuredMediaID={article.id ?? 0}
           description={
             parse(
               DOMPurify.sanitize(

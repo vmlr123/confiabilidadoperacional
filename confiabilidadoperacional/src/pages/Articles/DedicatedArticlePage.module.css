@@ -2,9 +2,9 @@
   color: var(--muted-color);
 }
 
-a,
-a:hover,
-a:focus {
+.content a,
+.content a:hover,
+.content a:focus {
   color: var(--link-color);
   text-decoration: none;
   background: none;

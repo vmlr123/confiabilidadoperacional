@@ -122,12 +122,12 @@
 }
 
 .active {
-  background-color: #007bff;
+  background-color: #00ff40;
   color: #ffffff;
 }
 
 .active:hover {
-  background-color: #0056b3;
+  background-color: #00b345;
   color: #ffffff;
 }
 

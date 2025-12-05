@@ -1,13 +1,89 @@
 import styles from "./Home.module.css";
+import Carousel from "react-bootstrap/Carousel";
+import type { ArticleData, MediaData, Theme } from "../App";
+import { Link } from "react-router-dom";
 
-export default function Home() {
+export default function Home({
+  articles,
+  media,
+  theme,
+}: {
+  articles: ArticleData[];
+  media: MediaData[];
+  theme: Theme;
+}) {
+  console.log(articles);
+  const imagesAndInfo = articles.map((article) => {
+    const mediaItem = media.find((image) => image.post === article.id);
+    const tags = article.class_list.map((tag) => {
+      if (tag.includes("tag-")) {
+        return tag.replace(/tag-/g, "");
+      }
+    });
+    return {
+      ...mediaItem,
+      title: article.title.rendered,
+      tags: tags,
+      date: article.date,
+      id: article.id,
+    };
+  });
   return (
     <>
-      {/*TODO: Add carousels with React Bootstrap */}
       <div className={styles.stories}>
-        <div className={styles.mainStory}></div>
-        <div className={styles.todayPost}></div>
-        <div className={styles.featuredStory}></div>
+        <div className={styles.mainStory}>
+          {/*Add link to article, and in tag, add link to articles with the selected tag */}
+          <div className={styles.carouselWrapper}>
+            <Carousel
+              indicators={true}
+              data-bs-theme={theme === "dark" ? "light" : "dark"}
+              className={styles.carousel}
+              interval={3000}
+              fade={true}
+            >
+              {imagesAndInfo.map((image) => (
+                <Carousel.Item
+                  key={image.id}
+                  className={styles.carItem}
+                  style={{
+                    backgroundImage: `url(${
+                      image?.source_url ||
+                      "https://via.placeholder.com/800x500?text=No+Image"
+                    })`
+                  }}
+                >
+                  <Carousel.Caption className={styles.carCaption}>
+                    {image.tags.map((tag) =>
+                      tag ? (
+                        <p className={styles.tag}>
+                          {tag[0].toUpperCase() + tag.slice(1)}
+                        </p>
+                      ) : null
+                    )}
+                    <Link
+                      to={`/articles/${image.id}`}
+                      style={{ display: "block", background: "none" }}
+                    >
+                      <h2 className={styles.carTitle}>{image.title}</h2>
+                    </Link>
+                    <div className={styles.centeredDetails}>
+                      <div className={styles.details}>
+                        <p className={styles.author}>Por Victor Lameda</p>
+                        <p className={styles.date}>
+                          {new Date(image.date).toLocaleDateString("es-ES")}
+                        </p>
+                      </div>
+                    </div>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          </div>
+        </div>
+        <div className={styles.latestPost}></div>
+        <div className={styles.featuredStory}>
+          {/* story with most views. coming soon...*/}
+        </div>
       </div>
       <div className={styles.home}>
         <h1 className={styles.title}>Bienvenido a Confiabilidad Operacional</h1>
