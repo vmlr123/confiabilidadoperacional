@@ -1,4 +1,4 @@
-- [ ] Add import for Link in Home.tsx
-- [ ] Wrap title h2 with Link to article
-- [ ] Wrap author and date with Link to article
-- [ ] Add CSS styles for links in Home.module.css
+- [x] Reduce carousel title font-size in mobile to 1rem
+- [x] Change carousel caption to bottom-aligned in mobile
+- [x] Adjust tag and details font-sizes in mobile
+- [ ] Fix title centering and increase width in mobile

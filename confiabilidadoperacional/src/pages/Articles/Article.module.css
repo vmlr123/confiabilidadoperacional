@@ -65,6 +65,7 @@
 
 .image img {
   height: auto;
+  border-radius: 8px;
 }
 
 .article {
@@ -181,7 +182,7 @@ a:focus {
 
 @media (max-width: 767px) {
   .article {
-    margin: 0.5rem;
+    margin: 1rem;
     padding: 0.5rem;
   }
 
