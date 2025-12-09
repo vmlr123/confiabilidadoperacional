@@ -9,13 +9,13 @@ import Menu from "./pages/Menu/Menu";
 import ErrorBoundary from "./components/ErrorBoundary";
 import RiskMatrix from "./pages/RiskMatrix/RiskMatrix";
 
-const Articles = lazy(() => import("./pages/Articles/Articles"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const Page = lazy(() => import("./pages/Page"));
+const Articles = lazy(() => import("./pages/Articles/Articles.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const Page = lazy(() => import("./pages/Page.tsx"));
 const DedicatedArticlePage = lazy(
-  () => import("./pages/Articles/DedicatedArticlePage")
+  () => import("./pages/Articles/DedicatedArticlePage.tsx")
 );
-const Home = lazy(() => import("./pages/Home"));
+const Home = lazy(() => import("./pages/Home.tsx"));
 
 export type Theme = "light" | "dark";
 

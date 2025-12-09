@@ -67,7 +67,7 @@ const Article = React.memo(function Article({
           <p className={styles.author}>
             <em>Autor: {author}</em>
           </p>
-          <p className={styles.description}>{description}</p>
+          <div className={styles.description}>{description}</div>
           {id ? (
             <Link to={slug} className={styles.button}>
               Sigue leyendo

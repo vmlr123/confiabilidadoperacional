@@ -36,7 +36,7 @@ export default function Home({
     return new Date(current.date) > new Date(latest.date) ? current : latest;
   }, imagesAndInfo[0]);
 
-  // TODO: change when I gather enough knowledge to find the most visited article in the entire
+  // TODO: change when I gather enough knowledge to find the most visited article in the entire site
   const mostVisitedArticle = imagesAndInfo.reduce((latest, current) => {
     return new Date(current.date) > new Date(latest.date) ? current : latest;
   }, imagesAndInfo[0]);
@@ -76,8 +76,8 @@ export default function Home({
                   <Carousel.Caption className={styles.carCaption}>
                     {image.tags.map((tag) =>
                       tag ? (
-                        <p className={styles.tag}>
-                          {tag[0].toUpperCase() + tag.slice(1)}
+                        <p className={styles.tag} key={tag}>
+                          {tag}
                         </p>
                       ) : null
                     )}
@@ -87,14 +87,7 @@ export default function Home({
                     >
                       <h2 className={styles.carTitle}>{image.title}</h2>
                     </Link>
-                    <div className={styles.centeredDetails}>
-                      <div className={styles.details}>
-                        <p className={styles.author}>Por Victor Lameda</p>
-                        <p className={styles.date}>
-                          {new Date(image.date).toLocaleDateString("es-ES")}
-                        </p>
-                      </div>
-                    </div>
+                    <div className={styles.centeredDetails}></div>
                   </Carousel.Caption>
                 </Carousel.Item>
               ))}
@@ -121,7 +114,11 @@ export default function Home({
               <Card.ImgOverlay>
                 {latestArticle.tags.map((tag) =>
                   tag ? (
-                    <p className={styles.tag} style={{ marginTop: "0" }}>
+                    <p
+                      className={styles.tag}
+                      style={{ marginTop: "0" }}
+                      key={tag}
+                    >
                       {tag[0].toUpperCase() + tag.slice(1)}
                     </p>
                   ) : null
@@ -131,9 +128,9 @@ export default function Home({
                   style={{
                     display: "block",
                     background: "rgba(0, 0, 0, 0.5)",
-                    padding: "1rem",
+                    padding: "1rem 0 0.5rem",
                     borderRadius: "1rem",
-                    margin: "0 0.5rem 0.5rem",
+                    margin: "0 0.5rem",
                     color: "white",
                   }}
                 >
@@ -141,7 +138,7 @@ export default function Home({
                     {latestArticle.title}
                   </Card.Title>
                 </Link>
-                <Card.Text
+                <div
                   className={styles.cardText}
                   style={{
                     background: "rgba(0, 0, 0, 0.5)",
@@ -152,7 +149,7 @@ export default function Home({
                   }}
                 >
                   {parse(DOMPurify.sanitize(latestArticle.excerpt))}
-                </Card.Text>
+                </div>
               </Card.ImgOverlay>
             </Card>
           </div>
@@ -167,7 +164,11 @@ export default function Home({
               <Card.ImgOverlay>
                 {mostVisitedArticle.tags.map((tag) =>
                   tag ? (
-                    <p className={styles.tag} style={{ marginTop: "0" }}>
+                    <p
+                      className={styles.tag}
+                      style={{ marginTop: "0" }}
+                      key={tag}
+                    >
                       {tag[0].toUpperCase() + tag.slice(1)}
                     </p>
                   ) : null
@@ -177,9 +178,9 @@ export default function Home({
                   style={{
                     display: "block",
                     background: "rgba(0, 0, 0, 0.5)",
-                    padding: "1rem",
+                    padding: "1rem 0 0.5rem",
                     borderRadius: "1rem",
-                    margin: "0 0.5rem 0.5rem",
+                    margin: "0 0.5rem",
                     color: "white",
                   }}
                 >
@@ -187,7 +188,7 @@ export default function Home({
                     {mostVisitedArticle.title}
                   </Card.Title>
                 </Link>
-                <Card.Text
+                <div
                   className={styles.cardText}
                   style={{
                     background: "rgba(0, 0, 0, 0.5)",
@@ -198,7 +199,7 @@ export default function Home({
                   }}
                 >
                   {parse(DOMPurify.sanitize(mostVisitedArticle.excerpt))}
-                </Card.Text>
+                </div>
               </Card.ImgOverlay>
             </Card>
           </div>
