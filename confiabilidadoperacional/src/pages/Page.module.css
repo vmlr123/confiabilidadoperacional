@@ -101,9 +101,15 @@ a:has(h6) {
   text-indent: 0;
 }
 
+.content > p > a {
+  display: block;
+}
+
 @media (max-width: 767px) {
   .page {
-    padding: 1rem;
+    width: 100vw;
+    padding: 0 1rem 0 0;
+    margin-left: 0;
   }
 
   .title {
@@ -112,5 +118,9 @@ a:has(h6) {
 
   .content {
     font-size: 1rem;
+  }
+
+  .content div div:has(div):has(a):has(img) {
+    margin-right: 1rem;
   }
 }
