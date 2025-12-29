@@ -85,7 +85,16 @@ export default function Home({
                       to={`/articles/${image.id}`}
                       style={{ display: "block", background: "none" }}
                     >
-                      <h2 className={styles.carTitle}>{image.title}</h2>
+                      <h2
+                        className={styles.carTitle}
+                        style={
+                          theme === "dark"
+                            ? { color: "white" }
+                            : { color: "black" }
+                        }
+                      >
+                        {image.title}
+                      </h2>
                     </Link>
                     <div className={styles.centeredDetails}></div>
                   </Carousel.Caption>
@@ -99,108 +108,190 @@ export default function Home({
           style={{
             border: "1px solid black",
             borderRadius: "1rem",
-            margin: "1rem",
+            margin: "0",
             padding: "1rem",
           }}
         >
           <div className={styles.latestPost}>
             <h2 className={styles.postTitle}>Latest Post:</h2>
-            <Card bg="secondary" style={{ padding: 0, margin: "0.5rem" }}>
-              <Card.Img
-                src={latestArticle.source_url}
-                variant="top"
-                className={styles.cardImg}
-              />
-              <Card.ImgOverlay>
-                {latestArticle.tags.map((tag) =>
-                  tag ? (
-                    <p
-                      className={styles.tag}
-                      style={{ marginTop: "0" }}
-                      key={tag}
+            <Card bg="secondary" className={styles.card}>
+              {latestArticle.source_url ? (
+                <>
+                  <Card.Img
+                    src={latestArticle.source_url}
+                    variant="top"
+                    className={styles.cardImg}
+                  />
+                  <Card.ImgOverlay>
+                    {latestArticle.tags.map((tag) =>
+                      tag ? (
+                        <p
+                          className={styles.tag}
+                          style={{ marginTop: "0" }}
+                          key={tag}
+                        >
+                          {tag[0].toUpperCase() + tag.slice(1)}
+                        </p>
+                      ) : null
+                    )}
+                    <Link
+                      to={`/articles/${latestArticle.id}`}
+                      style={{
+                        display: "block",
+                        background: "rgba(0, 0, 0, 0.5)",
+                        padding: "1rem 0 0.5rem",
+                        borderRadius: "1rem",
+                        margin: "0 0.5rem",
+                        color: "white",
+                      }}
                     >
-                      {tag[0].toUpperCase() + tag.slice(1)}
-                    </p>
-                  ) : null
-                )}
-                <Link
-                  to={`/articles/${latestArticle.id}`}
-                  style={{
-                    display: "block",
-                    background: "rgba(0, 0, 0, 0.5)",
-                    padding: "1rem 0 0.5rem",
-                    borderRadius: "1rem",
-                    margin: "0 0.5rem",
-                    color: "white",
-                  }}
-                >
-                  <Card.Title className={styles.cardTitle}>
-                    {latestArticle.title}
-                  </Card.Title>
-                </Link>
-                <div
-                  className={styles.cardText}
-                  style={{
-                    background: "rgba(0, 0, 0, 0.5)",
-                    padding: "0.5 0.5rem 0",
-                    borderRadius: "1rem",
-                    margin: "0.5rem",
-                    color: "white",
-                  }}
-                >
-                  {parse(DOMPurify.sanitize(latestArticle.excerpt))}
-                </div>
-              </Card.ImgOverlay>
+                      <Card.Title className={styles.cardTitle}>
+                        {latestArticle.title}
+                      </Card.Title>
+                    </Link>
+                    <div
+                      className={styles.cardText}
+                      style={{
+                        background: "rgba(0, 0, 0, 0.5)",
+                        padding: "0.5 0.5rem 0",
+                        borderRadius: "1rem",
+                        margin: "0.5rem",
+                        color: "white",
+                      }}
+                    >
+                      {parse(DOMPurify.sanitize(latestArticle.excerpt))}
+                    </div>
+                  </Card.ImgOverlay>
+                </>
+              ) : (
+                <Card.Body>
+                  {latestArticle.tags.map((tag) =>
+                    tag ? (
+                      <p className={styles.tag} key={tag}>
+                        {tag[0].toUpperCase() + tag.slice(1)}
+                      </p>
+                    ) : null
+                  )}
+                  <Link
+                    to={`/articles/${latestArticle.id}`}
+                    style={{
+                      display: "block",
+                      background: "rgba(0, 0, 0, 0.5)",
+                      padding: "1rem 0 0.5rem",
+                      borderRadius: "1rem",
+                      margin: "0 0.5rem",
+                      color: "white",
+                    }}
+                  >
+                    <Card.Title className={styles.cardTitle}>
+                      {latestArticle.title}
+                    </Card.Title>
+                  </Link>
+                  <div
+                    className={styles.cardText}
+                    style={{
+                      background: "rgba(0, 0, 0, 0.5)",
+                      padding: "0.5 0.5rem 0",
+                      borderRadius: "1rem",
+                      margin: "0.5rem",
+                      color: "white",
+                    }}
+                  >
+                    {parse(DOMPurify.sanitize(latestArticle.excerpt))}
+                  </div>
+                </Card.Body>
+              )}
             </Card>
           </div>
           <div className={styles.featuredStory}>
             <h2 className={styles.postTitle}>Featured Story:</h2>
-            <Card bg="secondary" style={{ padding: 0, margin: "0.5rem" }}>
-              <Card.Img
-                src={mostVisitedArticle.source_url}
-                variant="top"
-                className={styles.cardImg}
-              />
-              <Card.ImgOverlay>
-                {mostVisitedArticle.tags.map((tag) =>
-                  tag ? (
-                    <p
-                      className={styles.tag}
-                      style={{ marginTop: "0" }}
-                      key={tag}
+            <Card bg="secondary" className={styles.card}>
+              {mostVisitedArticle.source_url ? (
+                <>
+                  <Card.Img
+                    src={mostVisitedArticle.source_url}
+                    variant="top"
+                    className={styles.cardImg}
+                  />
+                  <Card.ImgOverlay>
+                    {mostVisitedArticle.tags.map((tag) =>
+                      tag ? (
+                        <p
+                          className={styles.tag}
+                          style={{ marginTop: "0" }}
+                          key={tag}
+                        >
+                          {tag[0].toUpperCase() + tag.slice(1)}
+                        </p>
+                      ) : null
+                    )}
+                    <Link
+                      to={`/articles/${mostVisitedArticle.id}`}
+                      style={{
+                        display: "block",
+                        background: "rgba(0, 0, 0, 0.5)",
+                        padding: "1rem 0 0.5rem",
+                        borderRadius: "1rem",
+                        margin: "0 0.5rem",
+                        color: "white",
+                      }}
                     >
-                      {tag[0].toUpperCase() + tag.slice(1)}
-                    </p>
-                  ) : null
-                )}
-                <Link
-                  to={`/articles/${mostVisitedArticle.id}`}
-                  style={{
-                    display: "block",
-                    background: "rgba(0, 0, 0, 0.5)",
-                    padding: "1rem 0 0.5rem",
-                    borderRadius: "1rem",
-                    margin: "0 0.5rem",
-                    color: "white",
-                  }}
-                >
-                  <Card.Title className={styles.cardTitle}>
-                    {mostVisitedArticle.title}
-                  </Card.Title>
-                </Link>
-                <div
-                  className={styles.cardText}
-                  style={{
-                    background: "rgba(0, 0, 0, 0.5)",
-                    padding: "0.5 0.5rem 0",
-                    borderRadius: "1rem",
-                    margin: "0.5rem",
-                    color: "white",
-                  }}
-                >
-                  {parse(DOMPurify.sanitize(mostVisitedArticle.excerpt))}
-                </div>
-              </Card.ImgOverlay>
+                      <Card.Title className={styles.cardTitle}>
+                        {mostVisitedArticle.title}
+                      </Card.Title>
+                    </Link>
+                    <div
+                      className={styles.cardText}
+                      style={{
+                        background: "rgba(0, 0, 0, 0.5)",
+                        padding: "0.5 0.5rem 0",
+                        borderRadius: "1rem",
+                        margin: "0.5rem",
+                        color: "white",
+                      }}
+                    >
+                      {parse(DOMPurify.sanitize(mostVisitedArticle.excerpt))}
+                    </div>
+                  </Card.ImgOverlay>
+                </>
+              ) : (
+                <Card.Body>
+                  {mostVisitedArticle.tags.map((tag) =>
+                    tag ? (
+                      <p className={styles.tag} key={tag}>
+                        {tag[0].toUpperCase() + tag.slice(1)}
+                      </p>
+                    ) : null
+                  )}
+                  <Link
+                    to={`/articles/${mostVisitedArticle.id}`}
+                    style={{
+                      display: "block",
+                      background: "rgba(0, 0, 0, 0.5)",
+                      padding: "1rem 0 0.5rem",
+                      borderRadius: "1rem",
+                      margin: "0 0.5rem",
+                      color: "white",
+                    }}
+                  >
+                    <Card.Title className={styles.cardTitle}>
+                      {mostVisitedArticle.title}
+                    </Card.Title>
+                  </Link>
+                  <div
+                    className={styles.cardText}
+                    style={{
+                      background: "rgba(0, 0, 0, 0.5)",
+                      padding: "0.5 0.5rem 0",
+                      borderRadius: "1rem",
+                      margin: "0.5rem",
+                      color: "white",
+                    }}
+                  >
+                    {parse(DOMPurify.sanitize(mostVisitedArticle.excerpt))}
+                  </div>
+                </Card.Body>
+              )}
             </Card>
           </div>
         </div>

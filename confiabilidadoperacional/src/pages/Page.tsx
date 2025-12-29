@@ -19,7 +19,7 @@ export default function Page({
       {listOfPagesWithTables.includes(title) && (
         <h4>
           Ésta página contiene una tabla. Si está utilizando un dispositivo con
-          una pantalla pequeña (como un teléfono), por favor ponga el
+          una pantalla pequeña (como un teléfono), por favor coloque el
           dispositivo en modo horizontal.
         </h4>
       )}
