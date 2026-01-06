@@ -108,32 +108,38 @@ export default function SelectedArticles({
           </button>
         </div>
       )}
-      {paginatedArticles.map((article) => (
-        <Article
-          key={article.id}
-          id={article.id}
-          title={
-            parse(
-              DOMPurify.sanitize(
-                article.title.rendered || "No se pudo cargar el contenido"
-              )
-            ) as ReactNode
+      {paginatedArticles.map((article) => {
+        const safeParse = (html: string) => {
+          try {
+            return parse(DOMPurify.sanitize(html)) as ReactNode;
+          } catch (error) {
+            console.warn(
+              "Failed to parse HTML, falling back to plain text:",
+              error
+            );
+            return html;
           }
-          date={
-            new Date(article.date).toLocaleDateString("es-ES") ||
-            "No se pudo cargar el contenido. Por favor intente recargar la página."
-          }
-          media={media}
-          featuredMediaID={article.featured_media ?? 0}
-          description={
-            parse(
-              DOMPurify.sanitize(
-                article.excerpt.rendered || "No se pudo cargar el contenido"
-              )
-            ) as ReactNode
-          }
-        />
-      ))}
+        };
+
+        return (
+          <Article
+            key={article.id}
+            id={article.id}
+            title={safeParse(
+              article.title.rendered || "No se pudo cargar el contenido"
+            )}
+            date={
+              new Date(article.date).toLocaleDateString("es-ES") ||
+              "No se pudo cargar el contenido. Por favor intente recargar la página."
+            }
+            media={media}
+            featuredMediaID={article.id ?? 0}
+            description={safeParse(
+              article.excerpt.rendered || "No se pudo cargar el contenido"
+            )}
+          />
+        );
+      })}
       {totalPages > 1 && (
         <div style={{ textAlign: "center", marginTop: "2rem" }}>
           <button

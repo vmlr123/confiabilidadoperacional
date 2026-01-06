@@ -7,24 +7,24 @@ import Footer from "./shared/Footer/Footer";
 import Loading from "./shared/Loading/Loading";
 import Menu from "./pages/Menu/Menu";
 import ErrorBoundary from "./components/ErrorBoundary";
-import RiskMatrix from "./pages/RiskMatrix/RiskMatrix";
+import RiskMatrix from "./pages/RiskMatrix/RiskMatrixPage.tsx";
 
-const Articles = lazy(() => import("./pages/Articles/Articles"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const Page = lazy(() => import("./pages/Page"));
+const Articles = lazy(() => import("./pages/Articles/Articles.tsx"));
+const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const Page = lazy(() => import("./pages/Page.tsx"));
 const DedicatedArticlePage = lazy(
-  () => import("./pages/Articles/DedicatedArticlePage")
+  () => import("./pages/Articles/DedicatedArticlePage.tsx")
 );
-const Home = lazy(() => import("./pages/Home"));
+const Home = lazy(() => import("./pages/Home.tsx"));
 
 export type Theme = "light" | "dark";
 
 export type ArticleData = {
-  id?: number;
+  id: number;
   title: { rendered: string };
   content?: { rendered: string };
   class_list: string[];
-  date: Date;
+  date: string;
   parent?: number;
   featured_media?: number;
   excerpt: { rendered: string };
@@ -38,6 +38,7 @@ export type MediaData = ArticleData & {
   };
   alt_text: string;
   source_url: string;
+  post: number;
 };
 
 const App = React.memo(function App() {
@@ -45,6 +46,8 @@ const App = React.memo(function App() {
   const [pages, setPages] = useState<PageData[]>([]);
   const [media, setMedia] = useState<MediaData[]>([]);
   const [loadingPages, setLoadingPages] = useState<boolean>(true);
+  const [loadingArticles, setLoadingArticles] = useState<boolean>(true);
+  const [loadingMedia, setLoadingMedia] = useState<boolean>(true);
   const [isMenuClicked, setIsMenuClicked] = useState<boolean>(false);
   const [theme, setTheme] = useState<Theme>("light");
 
@@ -82,6 +85,8 @@ const App = React.memo(function App() {
       setArticles(data);
     } catch {
       // Error handled silently
+    } finally {
+      setLoadingArticles(false);
     }
   }, []);
 
@@ -114,6 +119,8 @@ const App = React.memo(function App() {
       setMedia(data);
     } catch {
       // Error handled silently
+    } finally {
+      setLoadingMedia(false);
     }
   }, []);
 
@@ -137,7 +144,7 @@ const App = React.memo(function App() {
             pages={pages}
           />
           <div className="main-content">
-            {loadingPages ? (
+            {loadingPages || loadingArticles || loadingMedia ? (
               <Loading />
             ) : (
               <Menu
@@ -147,7 +154,12 @@ const App = React.memo(function App() {
               >
                 <Suspense fallback={<Loading />}>
                   <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route
+                      path="/"
+                      element={
+                        <Home articles={articles} media={media} theme={theme} />
+                      }
+                    />
                     {pages.map((page) => {
                       const slug = page.title.rendered
                         .toLowerCase()
@@ -188,7 +200,7 @@ const App = React.memo(function App() {
                                 date={new Date(
                                   article.date
                                 ).toLocaleDateString()}
-                                featuredMediaID={article.featured_media ?? 0}
+                                featuredMediaID={article.id ?? 0}
                                 media={media}
                               />
                             }

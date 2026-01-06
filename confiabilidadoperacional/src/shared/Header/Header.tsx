@@ -177,7 +177,7 @@ export default function Header({
                 </Link>
               </div>
             </Draggable>
-            <p className={styles.phrase}>Hacia la Excelencia Operacional.</p>
+            <p className={styles.phrase}>Hacia la Excelencia Operacional</p>
           </div>
         </div>
         <nav>

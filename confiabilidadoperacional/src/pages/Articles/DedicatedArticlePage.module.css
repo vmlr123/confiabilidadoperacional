@@ -2,13 +2,15 @@
   color: var(--muted-color);
 }
 
-a,
-a:hover,
-a:focus {
+.content a,
+.content a:hover,
+.content a:focus {
   color: var(--link-color);
   text-decoration: none;
   background: none;
   box-shadow: none;
+  padding: 0;
+  margin: 0;
 }
 
 figure img,
@@ -47,7 +49,7 @@ th {
   background-color: var(--content-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
   transition: box-shadow 0.3s ease;
-  max-width: 800px;
+  max-width: 1000px;
   box-sizing: border-box;
 }
 
@@ -63,7 +65,7 @@ th {
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin: 0.5rem 0;
   padding: 0.5rem 0;
   color: var(--text-color);
@@ -86,8 +88,11 @@ th {
   color: var(--muted-color);
   width: 100%;
   max-width: 100%;
-  line-height: 1.5;
-  text-align: center;
+  line-height: 2;
+  text-align: left;
+  font-size: large;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .content table {
@@ -98,7 +103,7 @@ th {
 
 .content div {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  margin: 2rem;
+  margin: 0;
   font-size: x-large;
   font-weight: bold;
   max-width: 100%;
@@ -110,8 +115,13 @@ th {
   margin: 0;
 }
 
+.content img {
+  background-color: white;
+}
+
 .content p {
   margin: 0;
+  text-indent: 0;
 }
 
 .content h1,
@@ -120,16 +130,24 @@ th {
   color: var(--text-color);
   margin-top: 2rem;
   margin-bottom: 1rem;
+  font-size: 2rem;
 }
 
 .content ul,
 .content ol {
-  margin-left: 2rem;
-  margin-bottom: 1rem;
+  margin-left: 0;
+  margin-bottom: 0;
+  text-indent: 0;
+  text-decoration: none;
+  padding-left: 0;
 }
 
 .content li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
+  padding-left: 0;
+  margin-left: 0;
+  text-indent: 0;
+  text-decoration: none;
 }
 
 .content a {
@@ -150,17 +168,11 @@ th {
 
 @media (max-width: 767px) {
   .article {
-    margin: 0.5rem;
-    padding: 0.5rem;
-  }
-
-  .author {
-    margin: 0.25rem 0;
-    padding: 0.25rem 0;
+    max-width: 400px;
+    padding: 1rem;
   }
 
   .title {
-    font-size: 1.2rem;
     margin: 0.25rem 0;
     padding: 0.25rem 0;
   }
@@ -172,6 +184,22 @@ th {
 
   .content div {
     margin: 1rem;
+    font-size: xx-small;
+    box-shadow: none;
+  }
+
+  .content table {
+    display: block;
+    width: 400px;
+    font-size: xx-small;
+    overflow: visible;
+    margin-left: -1.5rem;
+  }
+  .content img {
+    max-width: 120%;
+    height: auto;
+    display: block;
+    background-color: white;
   }
 }
 
@@ -187,7 +215,6 @@ th {
   }
 
   .title {
-    font-size: 1.75rem;
     margin: 0.75rem 0;
     padding: 0.75rem 0;
   }

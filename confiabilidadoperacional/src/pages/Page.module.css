@@ -1,8 +1,61 @@
 .page {
   text-align: center;
-  max-width: 60%;
+  width: 80%;
   margin: 3rem auto;
   line-height: 1.5;
+  justify-content: center;
+  align-items: center;
+}
+
+.content > h2 {
+  margin: 3rem 0;
+}
+
+a {
+  margin: 1rem 0 0 0;
+  padding: 0.5rem;
+}
+
+.content a:has(img) {
+  padding: 0;
+  background-color: none;
+  margin: 2rem 0 0 0;
+}
+
+.content a:has(h1),
+a:has(h2),
+a:has(h3),
+a:has(h4),
+a:has(h5),
+a:has(h6) {
+  margin: 1rem;
+  padding-bottom: 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.content div div:has(div):has(a):has(img) {
+  margin: 4rem 0;
+  padding: 4rem;
+  background-color: color-mix(in srgb, var(--accent-mid), transparent 70%);
+  border-radius: 5rem;
+  -webkit-border-radius: 5rem;
+  -moz-border-radius: 5rem;
+  -ms-border-radius: 5rem;
+  -o-border-radius: 5rem;
+}
+
+.content ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.content li {
+  margin: 1rem 0;
+}
+
+.content > h2 {
+  padding-bottom: 1rem;
 }
 
 .content table {
@@ -48,9 +101,15 @@
   text-indent: 0;
 }
 
+.content > p > a {
+  display: block;
+}
+
 @media (max-width: 767px) {
   .page {
-    padding: 1rem;
+    width: 100vw;
+    padding: 0 1rem 0 0;
+    margin-left: 0;
   }
 
   .title {
@@ -59,5 +118,9 @@
 
   .content {
     font-size: 1rem;
+  }
+
+  .content div div:has(div):has(a):has(img) {
+    margin-right: 1rem;
   }
 }
