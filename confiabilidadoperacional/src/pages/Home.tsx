@@ -103,15 +103,7 @@ export default function Home({
             </Carousel>
           </div>
         </div>
-        <div
-          className={styles.horizontalPosts}
-          style={{
-            border: "1px solid black",
-            borderRadius: "1rem",
-            margin: "0",
-            padding: "1rem",
-          }}
-        >
+        <div className={styles.horizontalPosts}>
           <div className={styles.latestPost}>
             <h2 className={styles.postTitle}>Latest Post:</h2>
             <Card bg="secondary" className={styles.card}>
@@ -122,7 +114,7 @@ export default function Home({
                     variant="top"
                     className={styles.cardImg}
                   />
-                  <Card.ImgOverlay>
+                  <Card.ImgOverlay className={styles.cardImgOverlay}>
                     {latestArticle.tags.map((tag) =>
                       tag ? (
                         <p
@@ -138,7 +130,7 @@ export default function Home({
                       to={`/articles/${latestArticle.id}`}
                       style={{
                         display: "block",
-                        background: "rgba(0, 0, 0, 0.5)",
+                        background: "rgba(0, 0, 0, 0.8)",
                         padding: "1rem 0 0.5rem",
                         borderRadius: "1rem",
                         margin: "0 0.5rem",
@@ -152,7 +144,7 @@ export default function Home({
                     <div
                       className={styles.cardText}
                       style={{
-                        background: "rgba(0, 0, 0, 0.5)",
+                        background: "rgba(0, 0, 0, 0.8)",
                         padding: "0.5 0.5rem 0",
                         borderRadius: "1rem",
                         margin: "0.5rem",
@@ -176,7 +168,7 @@ export default function Home({
                     to={`/articles/${latestArticle.id}`}
                     style={{
                       display: "block",
-                      background: "rgba(0, 0, 0, 0.5)",
+                      background: "rgba(0, 0, 0, 0.8)",
                       padding: "1rem 0 0.5rem",
                       borderRadius: "1rem",
                       margin: "0 0.5rem",
@@ -190,7 +182,7 @@ export default function Home({
                   <div
                     className={styles.cardText}
                     style={{
-                      background: "rgba(0, 0, 0, 0.5)",
+                      background: "rgba(0, 0, 0, 0.8)",
                       padding: "0.5 0.5rem 0",
                       borderRadius: "1rem",
                       margin: "0.5rem",
@@ -213,7 +205,7 @@ export default function Home({
                     variant="top"
                     className={styles.cardImg}
                   />
-                  <Card.ImgOverlay>
+                  <Card.ImgOverlay className={styles.cardImgOverlay}>
                     {mostVisitedArticle.tags.map((tag) =>
                       tag ? (
                         <p
@@ -229,7 +221,7 @@ export default function Home({
                       to={`/articles/${mostVisitedArticle.id}`}
                       style={{
                         display: "block",
-                        background: "rgba(0, 0, 0, 0.5)",
+                        background: "rgba(0, 0, 0, 0.8)",
                         padding: "1rem 0 0.5rem",
                         borderRadius: "1rem",
                         margin: "0 0.5rem",
@@ -243,7 +235,7 @@ export default function Home({
                     <div
                       className={styles.cardText}
                       style={{
-                        background: "rgba(0, 0, 0, 0.5)",
+                        background: "rgba(0, 0, 0, 0.8)",
                         padding: "0.5 0.5rem 0",
                         borderRadius: "1rem",
                         margin: "0.5rem",
@@ -267,7 +259,7 @@ export default function Home({
                     to={`/articles/${mostVisitedArticle.id}`}
                     style={{
                       display: "block",
-                      background: "rgba(0, 0, 0, 0.5)",
+                      background: "rgba(0, 0, 0, 0.8)",
                       padding: "1rem 0 0.5rem",
                       borderRadius: "1rem",
                       margin: "0 0.5rem",
@@ -281,7 +273,7 @@ export default function Home({
                   <div
                     className={styles.cardText}
                     style={{
-                      background: "rgba(0, 0, 0, 0.5)",
+                      background: "rgba(0, 0, 0, 0.8)",
                       padding: "0.5 0.5rem 0",
                       borderRadius: "1rem",
                       margin: "0.5rem",

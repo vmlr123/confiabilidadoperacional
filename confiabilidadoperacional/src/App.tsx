@@ -7,7 +7,7 @@ import Footer from "./shared/Footer/Footer";
 import Loading from "./shared/Loading/Loading";
 import Menu from "./pages/Menu/Menu";
 import ErrorBoundary from "./components/ErrorBoundary";
-import RiskMatrix from "./pages/RiskMatrix/RiskMatrix";
+import RiskMatrix from "./pages/RiskMatrix/RiskMatrixPage.tsx";
 
 const Articles = lazy(() => import("./pages/Articles/Articles.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
