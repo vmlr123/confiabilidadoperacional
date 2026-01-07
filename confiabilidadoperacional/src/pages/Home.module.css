@@ -87,19 +87,18 @@
 .mainStory {
   width: 80%;
   margin: 0 auto 2rem;
+  height: auto;
 }
 
 .latestPost,
 .featuredStory {
   display: flex;
-  height: fit-content;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   flex: 1;
   padding: 0;
   margin: 0;
-  min-height: 400px;
 }
 
 .item {
@@ -247,13 +246,11 @@
   padding: 0;
   margin: 0;
   width: 100%;
-  min-height: 350px;
+  height: auto;
   justify-content: center;
-  align-items: stretch;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -263,11 +260,22 @@
 }
 
 .cardText {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: var(--content-text);
+  padding: 1rem;
+}
+
+.cardText p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin: 0;
+  color: var(--content-text);
 }
 
 .cardTitle {
@@ -275,8 +283,15 @@
   font-weight: 600;
   line-height: 1.3;
   margin-bottom: 0.5rem;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: var(--text-color);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.contactHeader {
+  margin-top: 0;
+  padding: 0;
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 767px) {
@@ -295,12 +310,6 @@
     height: auto;
     padding: 1rem;
     gap: 1.5rem;
-  }
-
-  .latestPost,
-  .featuredStory {
-    width: 100%;
-    min-height: 300px;
   }
 
   .card {
@@ -332,11 +341,6 @@
     gap: 1rem;
   }
 
-  .latestPost,
-  .featuredStory {
-    min-height: 250px;
-  }
-
   .card {
     margin: 0.5rem 0;
     min-height: 220px;
@@ -354,6 +358,9 @@
 
   .cardTitle {
     font-size: 1rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: var(--text-color);
   }
 
   .author,
@@ -389,11 +396,6 @@
 
   .horizontalPosts {
     flex-direction: column;
-  }
-
-  .latestPost,
-  .featuredStory {
-    width: 100%;
   }
 
   .mainStory {
@@ -435,11 +437,14 @@
     font-size: 0.8rem;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    display: block;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    color: var(--content-text);
+  }
+
+  .cardText p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 0.8rem;
+    color: var(--content-text);
   }
 
   .tag {
@@ -460,5 +465,23 @@
     top: auto;
     bottom: 0;
     transform: none;
+  }
+}
+
+.linkedinBadge {
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.contact {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .contact {
+    margin: 1rem 0;
   }
 }

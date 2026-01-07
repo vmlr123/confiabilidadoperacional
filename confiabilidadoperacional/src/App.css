@@ -158,7 +158,7 @@ video {
 
 @media (min-width: 1025px) {
   .main-content {
-    width: 80%;
+    width: 100%;
   }
 }
 

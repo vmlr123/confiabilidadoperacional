@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import parse from "html-react-parser";
 import DOMPurify from "dompurify";
+import { useEffect } from "react";
 
 export default function Home({
   articles,
@@ -40,6 +41,23 @@ export default function Home({
   const mostVisitedArticle = imagesAndInfo.reduce((latest, current) => {
     return new Date(current.date) > new Date(latest.date) ? current : latest;
   }, imagesAndInfo[0]);
+
+  useEffect(() => {
+    const linkedInScript = document.createElement("script");
+    linkedInScript.src = "https://platform.linkedin.com/badges/js/profile.js";
+    linkedInScript.async = true; // Load asynchronously
+    linkedInScript.defer = true; // Defer execution
+    linkedInScript.type = "text/javascript";
+    document.body.appendChild(linkedInScript);
+
+    const bootstrapScript = document.createElement("script");
+    bootstrapScript.src =
+      "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js";
+    bootstrapScript.integrity =
+      "sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz";
+    bootstrapScript.crossOrigin = "anonymous";
+    document.body.appendChild(bootstrapScript);
+  }, []); // Empty dependency array ensures it runs once after mount
 
   return (
     <>
@@ -114,7 +132,7 @@ export default function Home({
                     variant="top"
                     className={styles.cardImg}
                   />
-                  <Card.ImgOverlay className={styles.cardImgOverlay}>
+                  <Card.Body>
                     {latestArticle.tags.map((tag) =>
                       tag ? (
                         <p
@@ -130,30 +148,17 @@ export default function Home({
                       to={`/articles/${latestArticle.id}`}
                       style={{
                         display: "block",
-                        background: "rgba(0, 0, 0, 0.8)",
-                        padding: "1rem 0 0.5rem",
-                        borderRadius: "1rem",
-                        margin: "0 0.5rem",
-                        color: "white",
+                        textDecoration: "none",
                       }}
                     >
                       <Card.Title className={styles.cardTitle}>
                         {latestArticle.title}
                       </Card.Title>
                     </Link>
-                    <div
-                      className={styles.cardText}
-                      style={{
-                        background: "rgba(0, 0, 0, 0.8)",
-                        padding: "0.5 0.5rem 0",
-                        borderRadius: "1rem",
-                        margin: "0.5rem",
-                        color: "white",
-                      }}
-                    >
+                    <div className={styles.cardText}>
                       {parse(DOMPurify.sanitize(latestArticle.excerpt))}
                     </div>
-                  </Card.ImgOverlay>
+                  </Card.Body>
                 </>
               ) : (
                 <Card.Body>
@@ -168,27 +173,14 @@ export default function Home({
                     to={`/articles/${latestArticle.id}`}
                     style={{
                       display: "block",
-                      background: "rgba(0, 0, 0, 0.8)",
-                      padding: "1rem 0 0.5rem",
-                      borderRadius: "1rem",
-                      margin: "0 0.5rem",
-                      color: "white",
+                      textDecoration: "none",
                     }}
                   >
                     <Card.Title className={styles.cardTitle}>
                       {latestArticle.title}
                     </Card.Title>
                   </Link>
-                  <div
-                    className={styles.cardText}
-                    style={{
-                      background: "rgba(0, 0, 0, 0.8)",
-                      padding: "0.5 0.5rem 0",
-                      borderRadius: "1rem",
-                      margin: "0.5rem",
-                      color: "white",
-                    }}
-                  >
+                  <div className={styles.cardText}>
                     {parse(DOMPurify.sanitize(latestArticle.excerpt))}
                   </div>
                 </Card.Body>
@@ -205,7 +197,7 @@ export default function Home({
                     variant="top"
                     className={styles.cardImg}
                   />
-                  <Card.ImgOverlay className={styles.cardImgOverlay}>
+                  <Card.Body>
                     {mostVisitedArticle.tags.map((tag) =>
                       tag ? (
                         <p
@@ -221,30 +213,17 @@ export default function Home({
                       to={`/articles/${mostVisitedArticle.id}`}
                       style={{
                         display: "block",
-                        background: "rgba(0, 0, 0, 0.8)",
-                        padding: "1rem 0 0.5rem",
-                        borderRadius: "1rem",
-                        margin: "0 0.5rem",
-                        color: "white",
+                        textDecoration: "none",
                       }}
                     >
                       <Card.Title className={styles.cardTitle}>
                         {mostVisitedArticle.title}
                       </Card.Title>
                     </Link>
-                    <div
-                      className={styles.cardText}
-                      style={{
-                        background: "rgba(0, 0, 0, 0.8)",
-                        padding: "0.5 0.5rem 0",
-                        borderRadius: "1rem",
-                        margin: "0.5rem",
-                        color: "white",
-                      }}
-                    >
+                    <div className={styles.cardText}>
                       {parse(DOMPurify.sanitize(mostVisitedArticle.excerpt))}
                     </div>
-                  </Card.ImgOverlay>
+                  </Card.Body>
                 </>
               ) : (
                 <Card.Body>
@@ -286,6 +265,18 @@ export default function Home({
               )}
             </Card>
           </div>
+        </div>
+        <div className={styles.contact}>
+          <h2 className={styles.contactHeader}>Contacto</h2>
+          <div
+            className={`badge-base LI-profile-badge ${styles.linkedinBadge}`}
+            data-locale="en_US"
+            data-size="small"
+            data-theme="light"
+            data-type="HORIZONTAL"
+            data-vanity="victor-lameda-rojas-9006331b0"
+            data-version="v1"
+          ></div>
         </div>
       </div>
     </>

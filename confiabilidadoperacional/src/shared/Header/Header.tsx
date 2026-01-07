@@ -101,7 +101,7 @@ export default function Header({
 
     let articleIndex: number = 0;
     let charIndex: number = 0;
-    let typingInterval: number;
+    let typingInterval: ReturnType<typeof setTimeout>;
 
     const typeText = () => {
       if (articleIndex >= titles.length) {

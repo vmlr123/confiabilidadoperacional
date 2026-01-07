@@ -15,12 +15,15 @@
     "bootstrap": "^5.3.8",
     "dompurify": "^3.3.0",
     "html-react-parser": "^5.2.7",
+    "papaparse": "^5.5.3",
     "react": "^18.3.1",
+    "react-adsense": "^0.1.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.5.0",
     "react-dropzone": "^14.3.8",
     "react-helmet-async": "^2.0.5",
+    "react-papaparse": "^4.4.0",
     "react-router-dom": "^7.9.4"
   },
   "devDependencies": {
